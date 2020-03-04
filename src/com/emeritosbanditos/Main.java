@@ -6,8 +6,14 @@ public class Main {
         double Addition(double A, double B);
     }
 
-    interface IArithmeticsMult{
+
+    interface IArithmeticsDiff {
+        double Difference(double A, double B);
+    }
+    
+  interface IArithmeticsMult{
         double Multiplication(double A, double B);
+
     }
 
 
@@ -17,5 +23,8 @@ public class Main {
         System.out.println("GithubID developera: 215848");
         System.out.println("GithubID testera: zenakz");
         System.out.println("Github ID developera: 215877");
+
+
+
     }
 }
