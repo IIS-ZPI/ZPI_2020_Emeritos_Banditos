@@ -1,6 +1,6 @@
 package com.emeritosbanditos;
 
-public class Main {
+public class Main {//Main class of the project
     public static void main(String[] args) {
         System.out.println("Nazwa grupy: Emeritos Baniditos\nGithubID team leadera/operations: Lisek8");
         System.out.println("GithubID developera: Nyitz");
