@@ -24,7 +24,7 @@ public class Main {
         System.out.println("GithubID testera: zenakz");
         System.out.println("Github ID developera: 215877");
         //zad5.3
-
+        //featureAlan
 
     }
 }
