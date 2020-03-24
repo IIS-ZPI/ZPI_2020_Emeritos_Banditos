@@ -6,6 +6,6 @@ public class ArithmeticsDivision implements IArthmeticsDiv {
         if (b == 0) {
             throw new ArithmeticException("Zero division error");
         }
-        return a/b;
+        return a / b;
     }
 }
