@@ -9,20 +9,4 @@ public class Main {
         System.out.println("GithubID testera: zenakz");
         System.out.println("Github ID developera: 215877");
     }
-
-    interface IArithmeticsAdd {
-        double Addition(double A, double B);
-    }
-
-    interface IArithmeticsDiff {
-        double Difference(double A, double B);
-    }
-
-    interface IArithmeticsMult {
-        double Multiplication(double A, double B);
-    }
-
-    interface IArthmeticsDiv {
-        double Division(double A, double B)
-    }
 }
