@@ -23,7 +23,7 @@
                             <filesets>
                                 <fileset>
                                     <directory>${project.basedir}\frontend\dist</directory>
-                                    <directory>${project.basedir}\dist</directory>
+                                    <directory>${project.basedir}\frontendBuild</directory>
                                 </fileset>
                             </filesets>
                         </configuration>
