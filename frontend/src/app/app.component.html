@@ -11,54 +11,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td> Jabłko </td>
-      <td>
-        <div class="input-group">
-          <select class="custom-select" aria-label="Wybór kategorii">
-            <option selected> Wybierz kategorię... </option>
-            <option value="1"> Groceries </option>
-            <option value="2"> Electronics </option>
-            <option value="3"> Chemicals </option>
-          </select>
-        </div>
-      </td>
-      <td> Alabama </td>
-      <td> <input class="form-control" type="number" step="0.01" value="0.25" id="wholesale-price-input"> </td>
-      <td> 1,00 </td>
-      <td> 0,9615 </td>
-      <td> 0,7115 </td>
-    </tr>
-    <tr>
-      <td> Jabłko </td>
-      <td>
-        <div class="input-group">
-          <select class="custom-select"aria-label="Wybór kategorii">
-            <option selected> Wybierz kategorię... </option>
-            <option value="1"> Groceries </option>
-            <option value="2"> Electronics </option>
-            <option value="3"> Chemicals </option>
-          </select>
-        </div>
-      </td>
-      <td> California </td>
-      <td> <input class="form-control" type="number" step="0.01" value="0.25" id="wholesale-price-input"> </td>
-      <td> 1,00 </td>
-      <td> 1,00 </td>
-      <td> 0,75 </td>
-    </tr>
     <tr *ngFor="let item of items">
       <td> {{item.name}} </td>
       <td>
         <div class="input-group">
-          <select class="custom-select" aria-label="Wybór kategorii">
-            <option selected> Wybierz kategorię... </option>
-            <option *ngFor="let category of categories" value="{{category.id}}"> {{category.name}} </option>
+          <select id="category-select-{{item.id}}" class="custom-select" aria-label="Wybór kategorii">
+            <option [selected]="category.id === item.categoryId" *ngFor="let category of categories" value="{{category.id}}"> {{category.name}} </option>
+            <option [selected]="item.categoryId === null"> Przypisz kategorię... </option>
           </select>
         </div>
       </td>
       <td> {{item.state}} </td>
-      <td> <input class="form-control" type="number" step="0.01" value="{{item.wholesalePrice}}"> </td>
+      <td> <input id="wholesale-price-select-{{item.id}}" class="form-control" type="number" step="0.01" value="{{item.wholesalePrice}}"> </td>
       <td> {{item.endPrice}} </td>
       <td> {{item.salePrice}} </td>
       <td> {{item.profitMargin}} </td>
