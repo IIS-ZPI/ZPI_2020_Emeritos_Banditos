@@ -8,12 +8,16 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-prod": "ng build --prod"
+    "build-prod": "ng build --prod --base-href /webui/"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "engines": {
+    "node": "12.16.x",
+    "npm": "6.x"
   },
   "private": true,
   "dependencies": {
