@@ -1,31 +1,3 @@
-<table class="table table-striped table-bordered table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th width="20%"> Nazwa </th>
-      <th width="20%"> Kategoria </th>
-      <th width="12%"> Stan </th>
-      <th width="12%"> Cena netto ($) </th>
-      <th width="12%"> Cena dla klienta ($) </th>
-      <th width="12%"> Cena sprzedaży ($) </th>
-      <th width="12%"> Marża ($) </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items">
-      <td> {{item.name}} </td>
-      <td>
-        <div class="input-group">
-          <select id="category-select-{{item.id}}" class="custom-select" aria-label="Wybór kategorii">
-            <option [selected]="category.id === item.categoryId" *ngFor="let category of categories" value="{{category.id}}"> {{category.name}} </option>
-            <option [selected]="item.categoryId === null"> Przypisz kategorię... </option>
-          </select>
-        </div>
-      </td>
-      <td> {{item.state}} </td>
-      <td> <input id="wholesale-price-select-{{item.id}}" class="form-control" type="number" step="0.01" value="{{item.wholesalePrice}}"> </td>
-      <td> {{item.endPrice}} </td>
-      <td> {{item.salePrice}} </td>
-      <td> {{item.profitMargin}} </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container p-3">
+  <router-outlet></router-outlet>
+</div>

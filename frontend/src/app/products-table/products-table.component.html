@@ -1,0 +1,35 @@
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th class="align-middle text-center" width="20%"> Nazwa </th>
+      <th class="align-middle text-center" width="20%"> Kategoria </th>
+      <th class="align-middle text-center" width="12%"> Stan </th>
+      <th class="align-middle text-center" width="12%"> Cena netto ($) </th>
+      <th class="align-middle text-center" width="12%"> Cena dla klienta ($) </th>
+      <th class="align-middle text-center" width="12%"> Cena sprzedaży ($) </th>
+      <th class="align-middle text-center" width="12%"> Marża ($) </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td class="align-middle text-center">{{ item.name }}</td>
+      <td>
+        <div class="input-group">
+          <select id="category-select-{{item.id}}" class="custom-select" aria-label="Wybór kategorii">
+            <option [selected]="category.id === item.categoryId" *ngFor="let category of categories"
+              value="{{category.id}}"> {{category.name}} </option>
+            <option [selected]="item.categoryId == null"> Przypisz kategorię... </option>
+          </select>
+        </div>
+      </td>
+      <td>{{ item.state }}</td>
+      <td>
+        <input id="wholesale-price-select-{{item.id}}" class="form-control" type="number" step="0.01"
+          value="{{item.wholesalePrice}}">
+      </td>
+      <td class="align-middle text-center">{{ item.endPrice }}</td>
+      <td class="align-middle text-center">{{ item.salePrice }}</td>
+      <td class="align-middle text-center">{{ item.profitMargin }}</td>
+    </tr>
+  </tbody>
+</table>
