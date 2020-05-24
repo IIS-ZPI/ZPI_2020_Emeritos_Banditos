@@ -1,1 +1,1 @@
-<% response.sendRedirect("/webui"); %>
+<% response.sendRedirect("/webui/"); %>
