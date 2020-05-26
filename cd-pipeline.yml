@@ -22,4 +22,4 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'HEROKU_API_KEY=$(HEROKU_API_KEY) heroku:deploy-war'
+    goals: 'heroku:deploy-war'
