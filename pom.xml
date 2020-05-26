@@ -12,6 +12,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+		<heroku.appName>zpi-projekt-webapp-podatki-us</heroku.appName>
     </properties>
 
     <dependencies>
@@ -179,6 +180,7 @@
                         <phase>deploy</phase>
                         <goals><goal>deploy-war</goal></goals>
                         <configuration>
+							<appName>${heroku.appName}</appName>
                             <processTypes>
                                 <web>java $JAVA_OPTS -jar target/dependency/webapp-runner.jar target/EmeritosBanditos-1.0.war</web>
                             </processTypes>
