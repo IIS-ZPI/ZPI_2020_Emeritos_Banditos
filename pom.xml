@@ -168,6 +168,23 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.0.RELEASE</version>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals><goal>deploy-war</goal></goals>
+                        <configuration>
+                            <processTypes>
+                                <web>java $JAVA_OPTS -jar target/dependency/webapp-runner.jar target/EmeritosBanditos-1.0.war</web>
+                            </processTypes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
