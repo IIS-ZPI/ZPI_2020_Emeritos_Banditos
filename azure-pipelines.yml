@@ -1,10 +1,11 @@
 # Maven
-pr:
-  - master
-  - develop
+trigger:
+  branches:
+    include:
+      - master
+      - develop
 
-pool:
-  vmImage: 'ubuntu-latest'
+pr: none
 
 steps:
 - task: UseNode@1
@@ -19,4 +20,4 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean install -P frontend'
+    goals: 'HEROKU_API_KEY=$(HEROKU_API_KEY) heroku:deploy-war'
