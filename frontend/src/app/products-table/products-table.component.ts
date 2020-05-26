@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, EMPTY } from 'rxjs';
+import { DataService } from '../data-service/data-service.service';
+import { catchError } from 'rxjs/operators';
+import { Category } from '../models/category';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-products-table',
@@ -6,36 +11,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products-table.component.css']
 })
 export class ProductsTableComponent implements OnInit {
-
+  errorMessage = '';
   title = 'frontend';
-  categories = [
-    { id: 0, name: 'Groceries' },
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Chemicals' }
-  ];
-  items = [
-    {
-      id: 0,
-      name: 'Jabłko',
-      categoryId: 0,
-      state: 'Arizona',
-      wholesalePrice: 1.00,
-      endPrice: 2.00,
-      salePrice: 1.75,
-      profitMargin: 0.75
-    }, {
-      id: 1,
-      name: 'iPhone 4',
-      categoryId: 1,
-      state: 'California',
-      wholesalePrice: 200.00,
-      endPrice: 250.00,
-      salePrice: 225.00,
-      profitMargin: 25.00
-    }
-  ];
+  categories$: Observable<Category[]> = this.dataService.categories$.pipe(
+    catchError(err => {
+      this.errorMessage = err;
+      return EMPTY;
+    })
+  );
+  items$: Observable<Product[]> = this.dataService.products$.pipe(
+    catchError(err => {
+      this.errorMessage = err;
+      return EMPTY;
+    })
+  );
 
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
   }
