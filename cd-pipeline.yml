@@ -1,4 +1,6 @@
 # Maven
+name: ContinuousDelivery
+
 trigger:
   branches:
     include:
