@@ -3,6 +3,7 @@ package org.emeritosbanditos.backend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import java.util.List;
 @RestController
 @SpringBootApplication
 @RequestMapping("/rest-services")
-public class DemoApplication {
+public class DemoApplication extends SpringBootServletInitializer {
     @Autowired
     StateRepo stateRepo;
 
@@ -22,7 +23,7 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-    @GetMapping("/Product")
+    @GetMapping("/product")
     public List<Product> getPrice(Product product, HttpSession session) {
         State state = stateRepo.findByName(product.getState());
         double margin = state.getMap().get(product.getCategory());
@@ -40,12 +41,12 @@ public class DemoApplication {
         return productList;
     }
 
-    @GetMapping("/ProductList")
+    @GetMapping("/productList")
     public List<Product> getProducts(HttpSession session) {
         return getProductList(session);
     }
 
-    @GetMapping("/States")
+    @GetMapping("/states")
     public List<String> getStatesList() {
         List<State> stateList = stateRepo.findAll();
         List<String> returnList = new ArrayList<>();
