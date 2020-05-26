@@ -1,16 +1,13 @@
-package org.emeritosbanditos.backend;
+package com.example.demo;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "products")
-public class Product {
-    @Id
-    @GeneratedValue
-    private int id;
+
+public class Product implements Serializable {
     private String name;
     private String category;
     private String state;
@@ -19,21 +16,17 @@ public class Product {
     private double sellprice;
     private double margin;
 
-    public Product(int id, String name, String category, String state, double netto, double clientprice, double sellprice, double margin) {
-        this.id = id;
+    public Product(String name, String category, String state, double netto, double clientprice) {
         this.name = name;
         this.category = category;
         this.state = state;
         this.netto = netto;
         this.clientprice = clientprice;
-        this.sellprice = sellprice;
-        this.margin = margin;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-               "id=" + id +
                ", name='" + name + '\'' +
                ", category='" + category + '\'' +
                ", state='" + state + '\'' +
@@ -48,17 +41,10 @@ public class Product {
     }
 
     public Product(int id, String name) {
-        this.id=id;
         this.name=name;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
