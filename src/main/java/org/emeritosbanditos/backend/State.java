@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.emeritosbanditos.backend;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
