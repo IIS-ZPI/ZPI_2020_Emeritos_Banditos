@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { Product } from '../models/Product';
+import { Product } from '../models/product';
 import { Category } from '../models/category';
 
 @Injectable({

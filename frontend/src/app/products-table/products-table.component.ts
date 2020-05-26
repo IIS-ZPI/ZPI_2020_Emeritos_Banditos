@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, EMPTY } from 'rxjs';
 import { DataService } from '../data-service/data-service.service';
 import { catchError } from 'rxjs/operators';
-import { Product } from '../models/Product';
 import { Category } from '../models/category';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-products-table',
