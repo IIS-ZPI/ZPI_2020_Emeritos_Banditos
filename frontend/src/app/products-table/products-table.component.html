@@ -23,11 +23,11 @@
         </div>
       </td>
       <td>{{ item.state }}</td>
-      <td>
-        <input id="wholesale-price-select-{{item.id}}" class="form-control" type="number" step="0.01"
-          value="{{item.wholesalePrice}}">
+      <td>{{ item.wholesalePrice }}</td>
+      <td class="align-middle text-center">
+        <input id="end-price-select-{{item.id}}" class="form-control" type="number" step="0.01"
+          value="{{item.endPrice}}">
       </td>
-      <td class="align-middle text-center">{{ item.endPrice }}</td>
       <td class="align-middle text-center">{{ item.salePrice }}</td>
       <td class="align-middle text-center">{{ item.profitMargin }}</td>
     </tr>
