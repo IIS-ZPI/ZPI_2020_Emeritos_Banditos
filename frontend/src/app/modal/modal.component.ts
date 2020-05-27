@@ -47,7 +47,7 @@ export class ModalComponent implements OnInit {
         category: this.category,
         state: this.state,
         netto: this.netto,
-        clientPrice: this.clientPrice
+        clientprice: this.clientPrice
       }
     );
   }
