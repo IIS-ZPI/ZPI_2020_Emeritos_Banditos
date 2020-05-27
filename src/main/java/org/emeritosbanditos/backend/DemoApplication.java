@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,18 @@ public class DemoApplication extends SpringBootServletInitializer {
         List<String> returnList = new ArrayList<>();
         for (State state : stateList) {
             returnList.add(state.getName());
+        }
+        return returnList;
+    }
+
+    @GetMapping("/categories")
+    public List<Category> getCategoriesList() {
+        List<Category> returnList=new ArrayList<>();
+        int id=0;
+        for(Field f:State.class.getDeclaredFields()){
+            if(!f.getName().equals("name")){
+                returnList.add(new Category(id++,f.getName()));
+            }
         }
         return returnList;
     }
