@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -25,7 +22,7 @@ public class DemoApplication extends SpringBootServletInitializer {
     }
 
     @PostMapping("/product")
-    public List<Product> getPrice(Product product, HttpSession session) {
+    public List<Product> getPrice(@RequestBody Product product, HttpSession session) {
         State state = stateRepo.findByName(product.getState());
         double margin = state.getMap().get(product.getCategory());
 
