@@ -1,5 +1,6 @@
 package org.emeritosbanditos.backend;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,6 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,17 @@ public class DemoApplication extends SpringBootServletInitializer {
         List<String> returnList = new ArrayList<>();
         for (State state : stateList) {
             returnList.add(state.getName());
+        }
+        return returnList;
+    }
+
+    @GetMapping("/categories")
+    public List<String> getCategoriesList() {
+        List<String> returnList=new ArrayList<>();
+        for(Field f:State.class.getDeclaredFields()){
+            if(!f.getName().equals("name")){
+                returnList.add(f.getName());
+            }
         }
         return returnList;
     }
