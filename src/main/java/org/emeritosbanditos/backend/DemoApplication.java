@@ -56,11 +56,12 @@ public class DemoApplication extends SpringBootServletInitializer {
     }
 
     @GetMapping("/categories")
-    public List<String> getCategoriesList() {
-        List<String> returnList=new ArrayList<>();
+    public List<Category> getCategoriesList() {
+        List<Category> returnList=new ArrayList<>();
+        int id=0;
         for(Field f:State.class.getDeclaredFields()){
             if(!f.getName().equals("name")){
-                returnList.add(f.getName());
+                returnList.add(new Category(id++,f.getName()));
             }
         }
         return returnList;
