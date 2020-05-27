@@ -3,7 +3,7 @@ export interface Product {
     category: string;
     state: string;
     netto: number;
-    clientPrice: number;
-    sellPrice?: number;
+    clientprice: number;
+    sellprice?: number;
     margin?: number;
 }

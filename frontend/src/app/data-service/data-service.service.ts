@@ -20,10 +20,8 @@ export class DataService {
     catchError(this.handleError)
   );
 
-  public categories$: Observable<Category[]> = of(
-    [{ id: 0, name: 'Groceries' },
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Chemicals' }]
+  public categories$: Observable<Category[]> = this.http.get<Category[]>(this.appBasePath + this.restServicesBasePath + 'categories').pipe(
+    catchError(this.handleError)
   );
 
   constructor(private http: HttpClient) { }
