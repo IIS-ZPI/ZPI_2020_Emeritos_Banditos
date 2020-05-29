@@ -1,9 +1,11 @@
 package org.emeritosbanditos.backend;
 
+
 import java.io.Serializable;
 
 
 public class Product implements Serializable {
+    private int id;
     private String name;
     private String category;
     private String state;
@@ -12,7 +14,8 @@ public class Product implements Serializable {
     private double sellprice;
     private double margin;
 
-    public Product(String name, String category, String state, double netto, double clientprice) {
+    public Product(int id,String name, String category, String state, double netto, double clientprice) {
+        this.id=id;
         this.name = name;
         this.category = category;
         this.state = state;
@@ -20,17 +23,26 @@ public class Product implements Serializable {
         this.clientprice = clientprice;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-               ", name='" + name + '\'' +
-               ", category='" + category + '\'' +
-               ", state='" + state + '\'' +
-               ", netto=" + netto +
-               ", clientPrice=" + clientprice +
-               ", sellPrice=" + sellprice +
-               ", margin=" + margin +
-               '}';
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category='" + category + '\'' +
+                ", state='" + state + '\'' +
+                ", netto=" + netto +
+                ", clientprice=" + clientprice +
+                ", sellprice=" + sellprice +
+                ", margin=" + margin +
+                '}';
     }
 
     public Product() {
