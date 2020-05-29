@@ -27,7 +27,11 @@ public class DemoApplication extends SpringBootServletInitializer {
         Product p= calculateProduct(product);
 
         List<Product> productList = getProducts(session);
-        p.setId(productList.get(productList.size()-1).getId()+1);
+        if(productList.isEmpty()){
+            p.setId(0);
+        }else{
+            p.setId(productList.get(productList.size()-1).getId()+1);
+        }
         productList.add(p);
         session.setAttribute("ProductList", productList);
         return productList;
