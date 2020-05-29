@@ -24,18 +24,11 @@ public class DemoApplication extends SpringBootServletInitializer {
 
     @PostMapping("/product")
     public List<Product> getPrice(@RequestBody Product product, HttpSession session) {
-        State state = stateRepo.findByName(product.getState());
-        double margin = state.getMap().get(product.getCategory());
-
-        if (margin == 0) {
-            product.setSellprice(product.getClientprice());
-        } else {
-            product.setSellprice(product.getClientprice() * (1 - margin / 100));
-        }
-        product.setMargin(product.getSellprice() - product.getNetto());
+        Product p= calculateProduct(product);
 
         List<Product> productList = getProducts(session);
-        productList.add(product);
+        p.setId(productList.get(productList.size()-1).getId()+1);
+        productList.add(p);
         session.setAttribute("ProductList", productList);
         return productList;
     }
@@ -44,6 +37,30 @@ public class DemoApplication extends SpringBootServletInitializer {
     public List<Product> getProducts(HttpSession session) {
         return getProductList(session);
     }
+
+    @PostMapping("/edit")
+    public void editProduct(@RequestBody Product product,HttpSession session){
+        List<Product> productList= getProductList(session);
+        Product productToEdit=productList.stream()
+                .filter(p->p.getId()==product.getId())
+                .findAny()
+                .orElseThrow(()->new RuntimeException("wrong id"));
+        productList.set(productList.indexOf(productToEdit), calculateProduct(product));
+        session.setAttribute("ProductList", productList);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public List<Product> deleteProduct(@PathVariable("id") int id,HttpSession session){
+        List<Product> productList= getProductList(session);
+        Product productToDelete=productList.stream()
+                .filter(p->p.getId()==id)
+                .findAny()
+                .orElseThrow(()->new RuntimeException("wrong id"));
+        productList.remove(productToDelete);
+        session.setAttribute("ProductList", productList);
+        return productList;
+    }
+
 
     @GetMapping("/states")
     public List<String> getStatesList() {
@@ -65,6 +82,19 @@ public class DemoApplication extends SpringBootServletInitializer {
             }
         }
         return returnList;
+    }
+
+    private Product calculateProduct(Product product){
+        State state = stateRepo.findByName(product.getState());
+        double margin = state.getMap().get(product.getCategory());
+
+        if (margin == 0) {
+            product.setSellprice(product.getClientprice());
+        } else {
+            product.setSellprice(product.getClientprice() * (1 - margin / 100));
+        }
+        product.setMargin(product.getSellprice() - product.getNetto());
+        return product;
     }
 
     private List<Product> getProductList(HttpSession session) {
