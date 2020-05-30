@@ -1,0 +1,16 @@
+#settings-button {
+    background: #999999 url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Cog_font_awesome.svg/1200px-Cog_font_awesome.svg.png") no-repeat;
+    background-size: 29px 29px;
+    background-position: 50% 50%;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+}
+
+#settings-button:hover {
+    filter: brightness(125%);
+    transition: 0.2s;
+}
