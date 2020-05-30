@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-settings',
@@ -7,6 +8,10 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal-settings.component.css']
 })
 export class ModalSettingsComponent implements OnInit {
+
+  fontSizeForm: FormGroup = new FormGroup({
+    fontSizeOption: new FormControl()
+  });
 
   constructor(config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
@@ -43,6 +48,21 @@ export class ModalSettingsComponent implements OnInit {
         }
       }
     }
+    const fontSize = localStorage.getItem('fontSize');
+    if (fontSize != null) {
+      this.fontSizeForm.patchValue({fontSizeOption: fontSize, tc: true});
+      document.body.classList.add('font-' + fontSize);
+    } else {
+      this.fontSizeForm.patchValue({fontSizeOption: 'small', tc: true});
+    }
+    const optionsId = 'fontSizeOption';
+    this.fontSizeForm.controls[optionsId].valueChanges.subscribe((state: any) => {
+      localStorage.setItem('fontSize', state);
+      document.body.classList.remove('font-small');
+      document.body.classList.remove('font-medium');
+      document.body.classList.remove('font-large');
+      document.body.classList.add('font-' + state);
+    });
   }
 
 }

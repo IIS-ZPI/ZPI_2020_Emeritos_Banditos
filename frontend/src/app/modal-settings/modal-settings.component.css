@@ -14,3 +14,21 @@
     filter: brightness(125%);
     transition: 0.2s;
 }
+
+div.settings-section {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+div.form-check-inline {
+    height: 30px;
+    line-height: 30px;
+    margin-right: 20px;
+}
