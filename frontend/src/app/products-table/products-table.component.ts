@@ -35,6 +35,10 @@ export class ProductsTableComponent implements OnInit {
     darkThemeSelected
       ? document.body.classList.add('dark')
       : document.body.classList.remove('dark');
+    const fontSize = localStorage.getItem('fontSize');
+    if (fontSize != null) {
+      document.body.classList.add('font-' + fontSize);
+    }
   }
 
 }

@@ -30,6 +30,10 @@ body.dark button.btn-outline-dark:hover {
     transition: 0.2s;
 }
 
+body.dark button.btn-outline-dark:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255,.5);
+}
+
 body.dark tbody {
     background-color: #f2f2f2;
 }
@@ -40,4 +44,39 @@ body.dark td {
 
 body.dark tr:hover {
     background-color: #d9d9d9;
+}
+
+body.font-small th,
+body.font-small td,
+body.font-small button,
+body.font-small label,
+body.font-small input[type='text'],
+body.font-small input[type='number'] {
+    font-size: 16px;
+}
+
+body.font-medium th,
+body.font-medium td,
+body.font-medium button,
+body.font-medium label,
+body.font-small input[type='text'],
+body.font-small input[type='number'] {
+    font-size: 20px;
+}
+
+body.font-large th,
+body.font-large td,
+body.font-large button,
+body.font-large label,
+body.font-small input[type='text'],
+body.font-small input[type='number'] {
+    font-size: 24px;
+}
+
+body.font-medium .container {
+    max-width: 1400px !important;
+}
+
+body.font-large .container {
+    max-width: 1600px;
 }

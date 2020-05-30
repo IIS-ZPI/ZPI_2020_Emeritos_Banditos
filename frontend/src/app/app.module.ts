@@ -8,7 +8,7 @@ import { ProductsTableComponent } from './products-table/products-table.componen
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSettingsComponent } from './modal-settings/modal-settings.component';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { ModalSettingsComponent } from './modal-settings/modal-settings.componen
       CommonModule,
       HttpClientModule,
       NgbModule,
-      FormsModule
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [],
    bootstrap: [
