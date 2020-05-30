@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body.dark {
+    background-color: #121212 !important;
+    color: #eee !important;
+}
+
+body.dark div {
+    background-color: #333333;
+    color: #eee !important;
+}
+
+body.dark button.close {
+    color: #fff !important;
+    text-shadow: none;
+}

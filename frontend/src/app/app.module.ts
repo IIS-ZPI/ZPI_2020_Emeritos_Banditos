@@ -9,12 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
 import { FormsModule } from '@angular/forms';
+import { ModalSettingsComponent } from './modal-settings/modal-settings.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       ProductsTableComponent,
-      ModalComponent
+      ModalComponent,
+      ModalSettingsComponent
    ],
    imports: [
       BrowserModule,

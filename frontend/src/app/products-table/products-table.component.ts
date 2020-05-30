@@ -29,6 +29,12 @@ export class ProductsTableComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    const darkThemeSelected =
+      localStorage.getItem('theme') !== null &&
+      localStorage.getItem('theme') === 'dark';
+    darkThemeSelected
+      ? document.body.classList.add('dark')
+      : document.body.classList.remove('dark');
   }
 
 }
