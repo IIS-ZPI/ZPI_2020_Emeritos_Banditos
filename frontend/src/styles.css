@@ -4,12 +4,40 @@ body.dark {
     color: #eee !important;
 }
 
-body.dark div {
+body.dark div.modal-header,
+body.dark div.modal-body,
+body.dark div.modal-footer {
     background-color: #333333;
     color: #eee !important;
+}
+
+body.dark div.modal-content {
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 body.dark button.close {
     color: #fff !important;
     text-shadow: none;
+}
+
+body.dark button.btn-outline-dark {
+    color: #eee;
+    border-color: #eee;
+}
+
+body.dark button.btn-outline-dark:hover {
+    filter: brightness(125%);
+    transition: 0.2s;
+}
+
+body.dark tbody {
+    background-color: #f2f2f2;
+}
+
+body.dark td {
+    border-color: #454d55;
+}
+
+body.dark tr:hover {
+    background-color: #d9d9d9;
 }
