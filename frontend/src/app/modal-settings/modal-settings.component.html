@@ -9,23 +9,28 @@
         <div class="form-group">
             <label for="darkSwitch">Tryb ciemny</label><br>
             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="darkSwitch" />
+                <input type="checkbox" class="custom-control-input" id="darkSwitch" [(ngModel)]="darkModeChecked"
+                    (change)="resetTheme()" />
                 <label class="custom-control-label" for="darkSwitch"></label>
             </div>
         </div>
         <div class="form-group">
             <label for="fontSizeOption">Wielkość czcionki</label>
-            <form [formGroup]="fontSizeForm">
+            <form [formGroup]="fontSizeForm" (change)="changeFont()">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="fontSizeOption" name="fontSizeOption" id="small" value="small">
+                    <input class="form-check-input" type="radio" formControlName="fontSizeOption" name="fontSizeOption"
+                        id="small" value="small">
                     <label class="form-check-label" for="fontSizeSmall" style="font-size: 16px !important;">Mała</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="fontSizeOption" name="fontSizeOption" id="medium" value="medium">
-                    <label class="form-check-label" for="fontSizeMedium" style="font-size: 20px !important;">Średnia</label>
+                    <input class="form-check-input" type="radio" formControlName="fontSizeOption" name="fontSizeOption"
+                        id="medium" value="medium">
+                    <label class="form-check-label" for="fontSizeMedium"
+                        style="font-size: 20px !important;">Średnia</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" formControlName="fontSizeOption" name="fontSizeOption" id="large" value="large">
+                    <input class="form-check-input" type="radio" formControlName="fontSizeOption" name="fontSizeOption"
+                        id="large" value="large">
                     <label class="form-check-label" for="fontSizeLarge" style="font-size: 24px !important;">Duża</label>
                 </div>
             </form>
