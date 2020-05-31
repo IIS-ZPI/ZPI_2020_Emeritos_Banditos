@@ -9,8 +9,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class ModalSettingsComponent implements OnInit {
 
+  darkModeChecked: boolean;
+
   fontSizeForm: FormGroup = new FormGroup({
-    fontSizeOption: new FormControl()
+    fontSizeOption: new FormControl('small')
   });
 
   constructor(config: NgbModalConfig, private modalService: NgbModal) {
@@ -19,50 +21,48 @@ export class ModalSettingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initTheme();
   }
 
   open(content: any) {
     this.modalService.open(content);
-    const darkSwitch = document.getElementById('darkSwitch') as HTMLInputElement;
-    if (darkSwitch) {
-      initTheme();
-      darkSwitch.addEventListener('change', (event) => {
-        resetTheme();
-      });
-      function initTheme() {
-        const darkThemeSelected =
-          localStorage.getItem('theme') !== null &&
-          localStorage.getItem('theme') === 'dark';
-        darkSwitch.checked = darkThemeSelected;
-        darkThemeSelected
-          ? document.body.classList.add('dark')
-          : document.body.classList.remove('dark');
-      }
-      function resetTheme() {
-        if (darkSwitch.checked) {
-          document.body.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          document.body.classList.remove('dark');
-          localStorage.removeItem('theme');
-        }
-      }
-    }
+  }
+
+  initFont() {
     const fontSize = localStorage.getItem('fontSize');
     if (fontSize != null) {
-      this.fontSizeForm.patchValue({fontSizeOption: fontSize, tc: true});
+      this.fontSizeForm.setValue({ fontSizeOption: fontSize, tc: true });
       document.body.classList.add('font-' + fontSize);
     } else {
-      this.fontSizeForm.patchValue({fontSizeOption: 'small', tc: true});
+      this.fontSizeForm.setValue({ fontSizeOption: 'small', tc: true });
     }
-    const optionsId = 'fontSizeOption';
-    this.fontSizeForm.controls[optionsId].valueChanges.subscribe((state: any) => {
-      localStorage.setItem('fontSize', state);
-      document.body.classList.remove('font-small');
-      document.body.classList.remove('font-medium');
-      document.body.classList.remove('font-large');
-      document.body.classList.add('font-' + state);
-    });
+  }
+
+  changeFont() {
+    localStorage.setItem('fontSize', this.fontSizeForm.value.fontSizeOption);
+    document.body.classList.remove('font-small');
+    document.body.classList.remove('font-medium');
+    document.body.classList.remove('font-large');
+    document.body.classList.add('font-' + this.fontSizeForm.value.fontSizeOption);
+  }
+
+  initTheme() {
+    this.darkModeChecked = localStorage.getItem('theme') !== null && localStorage.getItem('theme') === 'dark';
+    if (this.darkModeChecked) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+  }
+
+  resetTheme() {
+    if (this.darkModeChecked) {
+      document.body.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove('dark');
+      localStorage.removeItem('theme');
+    }
   }
 
 }
