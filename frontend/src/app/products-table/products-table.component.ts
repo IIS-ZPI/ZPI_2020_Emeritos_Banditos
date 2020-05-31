@@ -25,6 +25,12 @@ export class ProductsTableComponent implements OnInit {
       return EMPTY;
     })
   );
+  editMode = false;
+  states$: Observable<string[]> = this.dataService.states$.pipe(
+    catchError(err => {
+      return EMPTY;
+    })
+  );
 
   constructor(private dataService: DataService) { }
 
@@ -38,6 +44,28 @@ export class ProductsTableComponent implements OnInit {
     const fontSize = localStorage.getItem('fontSize');
     if (fontSize != null) {
       document.body.classList.add('font-' + fontSize);
+    } else {
+      localStorage.setItem('font-size', 'small');
+      document.body.classList.add('font-small');
+    }
+  }
+
+  deleteItem(itemName: string) {
+    if (confirm('Czy na pewno chcesz usunąć ' + itemName + '?')) {
+      // TODO: Usuwanie produktu
+    }
+  }
+
+  editItem(itemName: string, confirmed?: boolean) {
+    if (!this.editMode) {
+      this.editMode = true;
+    } else {
+      if (confirmed) {
+        // TODO: Zapisz zmiany
+      } else {
+        // Nic nie rób
+      }
+      this.editMode = false;
     }
   }
 

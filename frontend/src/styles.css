@@ -59,8 +59,8 @@ body.font-medium th,
 body.font-medium td,
 body.font-medium button,
 body.font-medium label,
-body.font-small input[type='text'],
-body.font-small input[type='number'] {
+body.font-medium input[type='text'],
+body.font-medium input[type='number'] {
     font-size: 20px;
 }
 
@@ -68,15 +68,35 @@ body.font-large th,
 body.font-large td,
 body.font-large button,
 body.font-large label,
-body.font-small input[type='text'],
-body.font-small input[type='number'] {
+body.font-large input[type='text'],
+body.font-large input[type='number'] {
     font-size: 24px;
 }
 
+.container {
+    max-width: 1200px;
+}
+
+body.font-small .container {
+    max-width: 1200px;
+}
+
 body.font-medium .container {
-    max-width: 1400px !important;
+    max-width: 1400px;
 }
 
 body.font-large .container {
     max-width: 1600px;
+}
+
+body.font-medium button.btn-modify {
+    width: 24px !important;
+    height: 24px !important;
+    background-size: 24px 24px !important;
+}
+
+body.font-large button.btn-modify {
+    width: 28px !important;
+    height: 28px !important;
+    background-size: 28px 28px !important;
 }
