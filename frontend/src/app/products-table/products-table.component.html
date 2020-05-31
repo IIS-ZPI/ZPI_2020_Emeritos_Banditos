@@ -16,7 +16,7 @@
       <!-- Nazwa -->
       <td class="align-middle text-center">
         <input [hidden]="!editMode" type="text" class="form-control"
-          id="netto-price-select-{{item.name + item.category + item.netto}}" placeholder="{{item.name}}">
+          id="netto-price-select-{{item.name + item.category + item.netto}}" value="{{item.name}}">
         <p [hidden]="editMode">{{ item.name }}</p>
       </td>
       <!-- Kategoria -->
