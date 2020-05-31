@@ -51,7 +51,8 @@ body.font-small td,
 body.font-small button,
 body.font-small label,
 body.font-small input[type='text'],
-body.font-small input[type='number'] {
+body.font-small input[type='number'],
+body.font-medium select {
     font-size: 16px;
 }
 
@@ -60,7 +61,8 @@ body.font-medium td,
 body.font-medium button,
 body.font-medium label,
 body.font-medium input[type='text'],
-body.font-medium input[type='number'] {
+body.font-medium input[type='number'],
+body.font-medium select {
     font-size: 20px;
 }
 
@@ -69,7 +71,8 @@ body.font-large td,
 body.font-large button,
 body.font-large label,
 body.font-large input[type='text'],
-body.font-large input[type='number'] {
+body.font-large input[type='number'],
+body.font-large select {
     font-size: 24px;
 }
 

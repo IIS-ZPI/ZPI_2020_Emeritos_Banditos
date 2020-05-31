@@ -26,6 +26,7 @@ export class ProductsTableComponent implements OnInit {
     })
   );
   editMode = false;
+  editId: number;
   states$: Observable<string[]> = this.dataService.states$.pipe(
     catchError(err => {
       return EMPTY;
@@ -50,15 +51,16 @@ export class ProductsTableComponent implements OnInit {
     }
   }
 
-  deleteItem(itemName: string) {
-    if (confirm('Czy na pewno chcesz usunąć ' + itemName + '?')) {
+  deleteItem(itemId: number) {
+    if (confirm('Czy na pewno chcesz usunąć produkt?')) {
       // TODO: Usuwanie produktu
     }
   }
 
-  editItem(itemName: string, confirmed?: boolean) {
+  editItem(itemId: number, confirmed?: boolean) {
     if (!this.editMode) {
       this.editMode = true;
+      this.editId = itemId;
     } else {
       if (confirmed) {
         // TODO: Zapisz zmiany

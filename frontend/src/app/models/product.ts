@@ -4,6 +4,7 @@ export interface Product {
     state: string;
     netto: number;
     clientprice: number;
+    id?: number;
     sellprice?: number;
     margin?: number;
 }
