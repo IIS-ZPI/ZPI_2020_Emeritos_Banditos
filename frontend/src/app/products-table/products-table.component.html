@@ -1,20 +1,27 @@
 <table class="table table-striped table-bordered table-hover">
   <thead class="thead-dark">
     <tr>
-      <th class="align-middle text-center" width="20%"> Nazwa </th>
-      <th class="align-middle text-center" width="20%"> Kategoria </th>
+      <th class="align-middle text-center" width="17%"> Nazwa </th>
+      <th class="align-middle text-center" width="17%"> Kategoria </th>
       <th class="align-middle text-center" width="12%"> Stan </th>
       <th class="align-middle text-center" width="12%"> Cena netto ($) </th>
       <th class="align-middle text-center" width="12%"> Cena dla klienta ($) </th>
       <th class="align-middle text-center" width="12%"> Cena sprzedaży ($) </th>
       <th class="align-middle text-center" width="12%"> Marża ($) </th>
+      <th class="align-middle text-center" width="6%"> Edycja </th>
     </tr>
   </thead>
   <tbody *ngIf="items$ | async as items">
     <tr *ngFor="let item of items">
-      <td class="align-middle text-center">{{ item.name }}</td>
+      <!-- Nazwa -->
       <td class="align-middle text-center">
-        <div class="input-group">
+        <input [style.display]="editMode ? 'none' : 'block'" type="text" class="form-control"
+          id="netto-price-select-{{item.name + item.category + item.netto}}" placeholder="{{item.name}}">
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.name }}</p>
+      </td>
+      <!-- Kategoria -->
+      <td class="align-middle text-center">
+        <div [style.display]="editMode ? 'none' : 'block'" class="input-group">
           <select *ngIf="categories$ | async as categories"
             id="category-select-{{item.name + item.category + item.netto}}" class="custom-select"
             aria-label="Wybór kategorii">
@@ -23,15 +30,57 @@
             <option [selected]="item.category == null"> Przypisz kategorię... </option>
           </select>
         </div>
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.category }}</p>
       </td>
-      <td class="align-middle text-center">{{ item.state }}</td>
-      <td class="align-middle text-center">{{ item.netto }}</td>
+      <!-- Stan -->
       <td class="align-middle text-center">
+        <div [style.display]="editMode ? 'none' : 'block'" class="input-group">
+          <select *ngIf="states$ | async as states"
+            id="state-select-{{item.name + item.category + item.netto}}" class="custom-select"
+            aria-label="Wybór kategorii">
+            <option [selected]="state === item.state" *ngFor="let state of states"
+              value="{{state}}"> {{state}} </option>
+            <option [selected]="item.state == null"> Przypisz stan... </option>
+          </select>
+        </div>
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.name }}</p>
+      </td>
+      <!-- Cena netto -->
+      <td class="align-middle text-center">
+        <input [style.display]="editMode ? 'none' : 'block'"
+          id="netto-price-select-{{item.name + item.category + item.netto}}" class="form-control" type="number"
+          step="0.01" value="{{item.netto}}">
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.netto }}</p>
+      </td>
+      <!-- Cena dla klienta -->
+      <td [style.display]="editMode ? 'none' : 'block'" class="align-middle text-center">
         <input id="end-price-select-{{item.name + item.category + item.netto}}" class="form-control" type="number"
           step="0.01" value="{{item.clientprice}}">
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.clientprice }}</p>
       </td>
-      <td class="align-middle text-center">{{ item.sellprice }}</td>
-      <td class="align-middle text-center">{{ item.margin }}</td>
+      <!-- Cena sprzedaży -->
+      <td class="align-middle text-center">
+        <input id="sell-price-select-{{item.name + item.category + item.netto}}" class="form-control" type="number"
+          step="0.01" value="{{item.sellprice}}">
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.sellprice }}</p>
+      </td>
+      <!-- Marża -->
+      <td class="align-middle text-center">
+        <input id="margin-select-{{item.name + item.category + item.netto}}" class="form-control" type="number"
+          step="0.01" value="{{item.margin}}">
+        <p [style.display]="editMode ? 'block' : 'none'">{{ item.margin }}</p>
+      </td>
+      <!-- Modyfikowanie -->
+      <td class="align-middle text-center">
+        <button [style.display]="editMode ? 'none' : 'inline-block'" (click)="editItem(item.name)"
+          class="btn btn-modify btn-edit"></button>
+        <button [style.display]="editMode ? 'none' : 'inline-block'" (click)="deleteItem(item.name)"
+          class="btn btn-modify btn-delete"></button>
+        <button [style.display]="editMode ? 'inline-block' : 'none'" (click)="editItem(item.name, true)"
+          class="btn btn-modify btn-confirm"></button>
+        <button [style.display]="editMode ? 'inline-block' : 'none'" (click)="editItem(item.name, false)"
+          class="btn btn-modify btn-cancel"></button>
+      </td>
     </tr>
   </tbody>
 </table>

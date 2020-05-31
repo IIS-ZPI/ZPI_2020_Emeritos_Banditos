@@ -1,0 +1,32 @@
+.btn-modify {
+    width: 20px !important;
+    height: 20px !important;
+    background-size: 20px 20px !important;
+    background-repeat: no-repeat !important;
+    background-position: 50% 50% !important;
+    padding: 0;
+}
+
+.btn-delete {
+    background: url("https://img.icons8.com/android/24/000000/trash.png");
+    margin-left: 2px;
+}
+
+.btn-edit {
+    background: url("https://img.icons8.com/metro/26/000000/pencil.png");
+    margin-right: 2px;
+}
+
+.btn-confirm {
+    background: url("https://img.icons8.com/color/48/000000/checked-2.png");
+    margin-right: 2px;
+}
+
+.btn-cancel {
+    background: url("https://img.icons8.com/color/48/000000/close-window.png");
+    margin-left: 2px;
+}
+
+.btn-modify:hover {
+    filter: invert(25%);
+}
