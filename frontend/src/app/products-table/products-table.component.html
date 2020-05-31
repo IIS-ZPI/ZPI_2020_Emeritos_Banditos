@@ -15,13 +15,13 @@
     <tr *ngFor="let item of items">
       <!-- Nazwa -->
       <td class="align-middle text-center">
-        <input [hidden]="!editMode" type="text" class="form-control"
+        <input [hidden]="!editMode || editId !== item.id" type="text" class="form-control"
           id="netto-price-select-{{item.name + item.category + item.netto}}" value="{{item.name}}">
         <p [hidden]="editMode && editId === item.id">{{ item.name }}</p>
       </td>
       <!-- Kategoria -->
       <td class="align-middle text-center">
-        <div [hidden]="!editMode" class="input-group">
+        <div [hidden]="!editMode || editId !== item.id" class="input-group">
           <select *ngIf="categories$ | async as categories"
             id="category-select-{{item.name + item.category + item.netto}}" class="custom-select"
             aria-label="Wybór kategorii">
@@ -34,7 +34,7 @@
       </td>
       <!-- Stan -->
       <td class="align-middle text-center">
-        <div [hidden]="!editMode" class="input-group">
+        <div [hidden]="!editMode || editId !== item.id" class="input-group">
           <select *ngIf="states$ | async as states" id="state-select-{{item.name + item.category + item.netto}}"
             class="custom-select" aria-label="Wybór kategorii">
             <option [selected]="state === item.state" *ngFor="let state of states" value="{{state}}"> {{state}}
@@ -46,25 +46,25 @@
       </td>
       <!-- Cena netto -->
       <td class="align-middle text-center">
-        <input [hidden]="!editMode" id="netto-price-select-{{item.name + item.category + item.netto}}"
+        <input [hidden]="!editMode || editId !== item.id" id="netto-price-select-{{item.name + item.category + item.netto}}"
           class="form-control" type="number" step="0.01" value="{{item.netto}}">
         <p [hidden]="editMode && editId === item.id">{{ item.netto }}</p>
       </td>
       <!-- Cena dla klienta -->
       <td class="align-middle text-center">
-        <input [hidden]="!editMode" id="end-price-select-{{item.name + item.category + item.netto}}"
+        <input [hidden]="!editMode || editId !== item.id" id="end-price-select-{{item.name + item.category + item.netto}}"
           class="form-control" type="number" step="0.01" value="{{item.clientprice}}">
         <p [hidden]="editMode && editId === item.id">{{ item.clientprice }}</p>
       </td>
       <!-- Cena sprzedaży -->
       <td class="align-middle text-center">
-        <input [hidden]="!editMode" id="sell-price-select-{{item.name + item.category + item.netto}}"
+        <input [hidden]="!editMode || editId !== item.id" id="sell-price-select-{{item.name + item.category + item.netto}}"
           class="form-control" type="number" step="0.01" value="{{item.sellprice}}">
         <p [hidden]="editMode && editId === item.id">{{ item.sellprice }}</p>
       </td>
       <!-- Marża -->
       <td class="align-middle text-center">
-        <input [hidden]="!editMode" id="margin-select-{{item.name + item.category + item.netto}}" class="form-control"
+        <input [hidden]="!editMode || editId !== item.id" id="margin-select-{{item.name + item.category + item.netto}}" class="form-control"
           type="number" step="0.01" value="{{item.margin}}">
         <p [hidden]="editMode && editId === item.id">{{ item.margin }}</p>
       </td>
@@ -72,8 +72,8 @@
       <td class="align-middle text-center">
         <button [hidden]="editMode && editId === item.id" (click)="editItem(item.id)" class="btn btn-modify btn-edit"></button>
         <button [hidden]="editMode && editId === item.id" (click)="deleteItem(item.id)" class="btn btn-modify btn-delete"></button>
-        <button [hidden]="!editMode" (click)="editItem(item.id, true)" class="btn btn-modify btn-confirm"></button>
-        <button [hidden]="!editMode" (click)="editItem(item.id, false)" class="btn btn-modify btn-cancel"></button>
+        <button [hidden]="!editMode || editId !== item.id" (click)="editItem(item.id, true)" class="btn btn-modify btn-confirm"></button>
+        <button [hidden]="!editMode || editId !== item.id" (click)="editItem(item.id, false)" class="btn btn-modify btn-cancel"></button>
       </td>
     </tr>
   </tbody>
