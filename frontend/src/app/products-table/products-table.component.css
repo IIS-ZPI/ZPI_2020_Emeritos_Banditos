@@ -30,3 +30,7 @@
 .btn-modify:hover {
     filter: invert(25%);
 }
+
+td p {
+    margin: 0;
+}
