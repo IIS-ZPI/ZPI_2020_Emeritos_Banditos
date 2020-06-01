@@ -79,6 +79,6 @@
   </tbody>
 </table>
 <div class="mt-3">
-  <app-modal [categories$]="categories$"></app-modal>
+  <app-modal [categories$]="categories$" (addProductEvent)="addProduct($event)"></app-modal>
 </div>
 <app-modal-settings></app-modal-settings>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, EMPTY } from 'rxjs';
 import { DataService } from '../data-service/data-service.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize, isEmpty, tap } from 'rxjs/operators';
 import { Category } from '../models/category';
 import { Product } from '../models/product';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products-table',
@@ -11,17 +12,16 @@ import { Product } from '../models/product';
   styleUrls: ['./products-table.component.css']
 })
 export class ProductsTableComponent implements OnInit {
-  errorMessage = '';
   title = 'frontend';
   categories$: Observable<Category[]> = this.dataService.categories$.pipe(
     catchError(err => {
-      this.errorMessage = err;
+      this.toastService.error('Nie udało się pobrać listy kategorii', 'Błąd');
       return EMPTY;
     })
   );
   items$: Observable<Product[]> = this.dataService.products$.pipe(
     catchError(err => {
-      this.errorMessage = err;
+      this.toastService.error('Nie udało się pobrać listy produktów', 'Błąd');
       return EMPTY;
     })
   );
@@ -29,11 +29,12 @@ export class ProductsTableComponent implements OnInit {
   editId: number;
   states$: Observable<string[]> = this.dataService.states$.pipe(
     catchError(err => {
+      this.toastService.error('Nie udało się pobrać listy stanów', 'Błąd');
       return EMPTY;
     })
   );
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private toastService: ToastrService) { }
 
   ngOnInit() {
     const darkThemeSelected =
@@ -69,6 +70,22 @@ export class ProductsTableComponent implements OnInit {
       }
       this.editMode = false;
     }
+  }
+
+  addProduct(product: Product) {
+    let errorOccured = false;
+    this.items$ = this.dataService.postProduct(product).pipe(
+      catchError(err => {
+        this.toastService.error('Nie udało się dodać produktu', 'Błąd');
+        errorOccured = true;
+        return this.dataService.products$;
+      }),
+      tap(value => {
+        if (!errorOccured) {
+          this.toastService.success('Pomyślnie dodano produkt', 'Sukces');
+        }
+      })
+    );
   }
 
 }
