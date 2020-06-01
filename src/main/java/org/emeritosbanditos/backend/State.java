@@ -1,5 +1,6 @@
 package org.emeritosbanditos.backend;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -79,9 +80,9 @@ public class State {
         return "State{" +
                "name='" + name + '\'' +
                ", groceries=" + groceries +
-               ", preparedFood=" + preparedfood +
-               ", prescriptionDrug=" + prescriptiondrug +
-               ", nonPrescriptionDrug=" + nonprescriptiondrug +
+               ", preparedfood=" + preparedfood +
+               ", prescriptiondrug=" + prescriptiondrug +
+               ", nonprescriptiondrug=" + nonprescriptiondrug +
                ", clothing=" + clothing +
                ", intangibles=" + intangibles +
                '}';
@@ -90,9 +91,9 @@ public class State {
     public HashMap<String,Double> getMap(){
         HashMap<String,Double> result=new HashMap<>();
         result.put("groceries",groceries);
-        result.put("preparedFood", preparedfood);
-        result.put("prescriptionDrug", preparedfood);
-        result.put("nonPrescriptionDrug", nonprescriptiondrug);
+        result.put("preparedfood", preparedfood);
+        result.put("prescriptiondrug", preparedfood);
+        result.put("nonprescriptiondrug", nonprescriptiondrug);
         result.put("clothing",clothing);
         result.put("intangibles",intangibles);
         return result;
@@ -101,3 +102,4 @@ public class State {
     public State() {
     }
 }
+
