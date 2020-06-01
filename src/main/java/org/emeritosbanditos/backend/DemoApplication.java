@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,51 +17,33 @@ public class DemoApplication extends SpringBootServletInitializer {
     @Autowired
     StateRepo stateRepo;
 
+    @Autowired
+    ProductRepo productRepo;
+
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
 
     @PostMapping("/product")
-    public List<Product> getPrice(@RequestBody Product product, HttpSession session) {
-        Product p= calculateProduct(product);
-
-        List<Product> productList = getProducts(session);
-        if(productList.isEmpty()){
-            p.setId(0);
-        }else{
-            p.setId(productList.get(productList.size()-1).getId()+1);
-        }
-        productList.add(p);
-        session.setAttribute("ProductList", productList);
-        return productList;
+    public List<Product> getPrice(@RequestBody Product product) {
+        productRepo.save(calculateProduct(product));
+        return productRepo.findAll();
     }
 
     @GetMapping("/productList")
-    public List<Product> getProducts(HttpSession session) {
-        return getProductList(session);
+    public List<Product> getProducts() {
+        return productRepo.findAll();
     }
 
     @PostMapping("/edit")
-    public void editProduct(@RequestBody Product product,HttpSession session){
-        List<Product> productList= getProductList(session);
-        Product productToEdit=productList.stream()
-                .filter(p->p.getId()==product.getId())
-                .findAny()
-                .orElseThrow(()->new RuntimeException("wrong id"));
-        productList.set(productList.indexOf(productToEdit), calculateProduct(product));
-        session.setAttribute("ProductList", productList);
+    public void editProduct(@RequestBody Product product){
+        productRepo.save(calculateProduct(product));
     }
 
     @DeleteMapping("/delete/{id}")
-    public List<Product> deleteProduct(@PathVariable("id") int id,HttpSession session){
-        List<Product> productList= getProductList(session);
-        Product productToDelete=productList.stream()
-                .filter(p->p.getId()==id)
-                .findAny()
-                .orElseThrow(()->new RuntimeException("wrong id"));
-        productList.remove(productToDelete);
-        session.setAttribute("ProductList", productList);
-        return productList;
+    public List<Product> deleteProduct(@PathVariable("id") int id){
+        productRepo.delete(productRepo.findById(id).orElseThrow(()->new RuntimeException("wrong id")));
+        return productRepo.findAll();
     }
 
 
@@ -101,13 +82,5 @@ public class DemoApplication extends SpringBootServletInitializer {
         return product;
     }
 
-    private List<Product> getProductList(HttpSession session) {
-        List<Product> productList = (List<Product>) session.getAttribute("ProductList");
-
-        if (productList == null) {
-            productList = new ArrayList<>();
-        }
-        return productList;
-    }
 
 }
