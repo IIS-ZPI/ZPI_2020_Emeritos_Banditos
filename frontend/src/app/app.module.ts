@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSettingsComponent } from './modal-settings/modal-settings.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
    declarations: [
@@ -25,7 +27,9 @@ import { ModalSettingsComponent } from './modal-settings/modal-settings.componen
       HttpClientModule,
       NgbModule,
       FormsModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      ToastrModule.forRoot()
    ],
    providers: [],
    bootstrap: [

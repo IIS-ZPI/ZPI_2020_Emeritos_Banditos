@@ -26,10 +26,9 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
-  public postProduct(product: Product) {
-    this.http.post<any>(this.appBasePath + this.restServicesBasePath + 'product', product).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
+  public postProduct(product: Product): Observable<Product[]> {
+    return this.http.post<any>(this.appBasePath + this.restServicesBasePath + 'product', product).pipe(
+      catchError(this.handleError)
     );
   }
 

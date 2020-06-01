@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, EMPTY } from 'rxjs';
 import { Category } from '../models/category';
 import { DataService } from '../data-service/data-service.service';
 import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-modal',
@@ -12,8 +14,10 @@ import { catchError } from 'rxjs/operators';
 })
 export class ModalComponent implements OnInit {
   @Input() categories$: Observable<Category[]>;
+  @Output() addProductEvent = new EventEmitter<Product>();
   states$: Observable<string[]> = this.dataService.states$.pipe(
     catchError(err => {
+      this.toastService.error('Nie udało się pobrac listy stanów', 'Błąd');
       return EMPTY;
     })
   );
@@ -24,7 +28,8 @@ export class ModalComponent implements OnInit {
   netto: number;
   clientPrice: number;
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal, private dataService: DataService) {
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private dataService: DataService,
+              private toastService: ToastrService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -41,7 +46,7 @@ export class ModalComponent implements OnInit {
   }
 
   sumbitProduct() {
-    this.dataService.postProduct(
+    this.addProductEvent.emit(
       {
         name: this.name,
         category: this.category,
