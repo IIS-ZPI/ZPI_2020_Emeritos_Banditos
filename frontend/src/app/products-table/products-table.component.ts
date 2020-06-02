@@ -84,6 +84,7 @@ export class ProductsTableComponent implements OnInit {
         let errorOccured = false;
         this.items$ = this.dataService.editProduct(
           {
+            id,
             name: this.newName,
             category: this.newCategory,
             state: this.newState,
