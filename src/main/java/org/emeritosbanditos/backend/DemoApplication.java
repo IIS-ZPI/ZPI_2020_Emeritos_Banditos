@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @SpringBootApplication
@@ -27,23 +28,24 @@ public class DemoApplication extends SpringBootServletInitializer {
     @PostMapping("/product")
     public List<Product> getPrice(@RequestBody Product product) {
         productRepo.save(calculateProduct(product));
-        return productRepo.findAll();
+        return productRepo.findAll().stream().sorted().collect(Collectors.toList());
     }
 
     @GetMapping("/productList")
     public List<Product> getProducts() {
-        return productRepo.findAll();
+        return productRepo.findAll().stream().sorted().collect(Collectors.toList());
     }
 
     @PostMapping("/edit")
-    public void editProduct(@RequestBody Product product){
+    public List<Product> editProduct(@RequestBody Product product){
         productRepo.save(calculateProduct(product));
+        return productRepo.findAll().stream().sorted().collect(Collectors.toList());
     }
 
     @DeleteMapping("/delete/{id}")
     public List<Product> deleteProduct(@PathVariable("id") int id){
         productRepo.delete(productRepo.findById(id).orElseThrow(()->new RuntimeException("wrong id")));
-        return productRepo.findAll();
+        return productRepo.findAll().stream().sorted().collect(Collectors.toList());
     }
 
 
@@ -76,9 +78,9 @@ public class DemoApplication extends SpringBootServletInitializer {
         if (margin == 0) {
             product.setSellprice(product.getClientprice());
         } else {
-            product.setSellprice(product.getClientprice() * (1 - margin / 100));
+            product.setSellprice(Math.round(product.getClientprice() * (1 - margin / 100)*100.0)/100.0);
         }
-        product.setMargin(product.getSellprice() - product.getNetto());
+        product.setMargin(Math.round((product.getSellprice() - product.getNetto())*100)/100.0);
         return product;
     }
 
