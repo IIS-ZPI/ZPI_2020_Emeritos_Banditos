@@ -33,6 +33,11 @@ export class ProductsTableComponent implements OnInit {
       return EMPTY;
     })
   );
+  newName: string;
+  newCategory: string;
+  newState: string;
+  newNetto: number;
+  newClientPrice: number;
 
   constructor(private dataService: DataService, private toastService: ToastrService) { }
 
@@ -52,21 +57,50 @@ export class ProductsTableComponent implements OnInit {
     }
   }
 
-  deleteItem(itemId: number) {
+  deleteProduct(id: number) {
+    let errorOccured = false;
     if (confirm('Czy na pewno chcesz usunąć produkt?')) {
-      // TODO: Usuwanie produktu
+      this.dataService.deleteProduct(id).pipe(
+        catchError(err => {
+          this.toastService.error('Nie udało się usunąć produktu', 'Błąd');
+          errorOccured = true;
+          return this.dataService.products$;
+        }),
+        tap(value => {
+          if (!errorOccured) {
+            this.toastService.success('Pomyślnie usunięto produkt', 'Sukces');
+          }
+        })
+      );
     }
   }
 
-  editItem(itemId: number, confirmed?: boolean) {
+  editProduct(id: number, confirmed?: boolean) {
     if (!this.editMode) {
       this.editMode = true;
-      this.editId = itemId;
+      this.editId = id;
     } else {
       if (confirmed) {
-        // TODO: Zapisz zmiany
-      } else {
-        // Nic nie rób
+        let errorOccured = false;
+        this.items$ = this.dataService.editProduct(
+          {
+            name: this.newName,
+            category: this.newCategory,
+            state: this.newState,
+            netto: this.newNetto,
+            clientprice: this.newClientPrice
+          }).pipe(
+            catchError(err => {
+              this.toastService.error('Nie udało się zmodyfikować produktu', 'Błąd');
+              errorOccured = true;
+              return this.dataService.products$;
+            }),
+            tap(value => {
+              if (!errorOccured) {
+                this.toastService.success('Pomyślnie zmodyfikowano produkt', 'Błąd');
+              }
+            })
+          );
       }
       this.editMode = false;
     }
