@@ -1,6 +1,5 @@
 package org.emeritosbanditos.backend;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -9,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name ="products")
-public class Product implements Serializable {
+public class Product implements Serializable, Comparable<Product> {
     @Id
     @GeneratedValue
     private int id;
@@ -115,5 +114,10 @@ public class Product implements Serializable {
 
     public void setMargin(double margin) {
         this.margin = margin;
+    }
+
+    @Override
+    public int compareTo(Product o) {
+        return this.getId()-((Product)o).getId();
     }
 }
