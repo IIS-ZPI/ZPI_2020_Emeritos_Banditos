@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, from } from 'rxjs';
 import { DataService } from '../data-service/data-service.service';
 import { catchError, finalize, isEmpty, tap } from 'rxjs/operators';
 import { Category } from '../models/category';
@@ -57,10 +57,10 @@ export class ProductsTableComponent implements OnInit {
     }
   }
 
-  deleteProduct(id: number) {
-    let errorOccured = false;
-    if (confirm('Czy na pewno chcesz usunąć produkt?')) {
-      this.dataService.deleteProduct(id).pipe(
+  deleteProduct(item: Product) {
+    if (confirm('Czy na pewno chcesz usunąć produkt ' + item.name + '?')) {
+      let errorOccured = false;
+      this.items$ = this.dataService.deleteProduct(item.id).pipe(
         catchError(err => {
           this.toastService.error('Nie udało się usunąć produktu', 'Błąd');
           errorOccured = true;
@@ -75,35 +75,50 @@ export class ProductsTableComponent implements OnInit {
     }
   }
 
-  editProduct(id: number, confirmed?: boolean) {
+  toggleEditMode(item: Product) {
     if (!this.editMode) {
+      this.editId = item.id;
+      this.newName = item.name;
+      this.newCategory = item.category;
+      this.newState = item.state;
+      this.newNetto = item.netto;
+      this.newClientPrice = item.clientprice;
       this.editMode = true;
-      this.editId = id;
+    } else if (this.editMode && this.editId !== item.id) {
+      this.editId = item.id;
+      this.newName = item.name;
+      this.newCategory = item.category;
+      this.newState = item.state;
+      this.newNetto = item.netto;
+      this.newClientPrice = item.clientprice;
     } else {
-      if (confirmed) {
-        let errorOccured = false;
-        this.items$ = this.dataService.editProduct(
-          {
-            id,
-            name: this.newName,
-            category: this.newCategory,
-            state: this.newState,
-            netto: this.newNetto,
-            clientprice: this.newClientPrice
-          }).pipe(
-            catchError(err => {
-              this.toastService.error('Nie udało się zmodyfikować produktu', 'Błąd');
-              errorOccured = true;
-              return this.dataService.products$;
-            }),
-            tap(value => {
-              if (!errorOccured) {
-                this.toastService.success('Pomyślnie zmodyfikowano produkt', 'Błąd');
-              }
-            })
-          );
-      }
       this.editMode = false;
+    }
+  }
+
+  editProduct(item: Product, confirmed?: boolean) {
+    if (confirmed) {
+      let errorOccured = false;
+      this.items$ = this.dataService.editProduct(
+        {
+          id: item.id,
+          name: this.newName,
+          category: this.newCategory,
+          state: this.newState,
+          netto: this.newNetto,
+          clientprice: this.newClientPrice
+        }).pipe(
+          catchError(err => {
+            this.toastService.error('Nie udało się zmodyfikować produktu', 'Błąd');
+            errorOccured = true;
+            return this.dataService.products$;
+          }),
+          tap(value => {
+            if (!errorOccured) {
+              this.toastService.success('Pomyślnie zmodyfikowano produkt', 'Sukces');
+            }
+          })
+        );
     }
   }
 
