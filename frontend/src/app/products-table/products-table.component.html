@@ -16,7 +16,7 @@
       <!-- Nazwa -->
       <td class="align-middle text-center">
         <input [hidden]="!editMode || editId !== item.id" type="text" class="form-control"
-          id="netto-price-select-{{item.id}}" value="{{item.name}}" [(ngModel)]="newName">
+          id="netto-price-select-{{item.id}}" [(ngModel)]="newName">
         <p [hidden]="editMode && editId === item.id">{{ item.name }}</p>
       </td>
       <!-- Kategoria -->
@@ -26,7 +26,7 @@
             id="category-select-{{item.id}}" class="custom-select"
             aria-label="Wybór kategorii" [(ngModel)]="newCategory">
             <option [selected]="category.name === item.category" *ngFor="let category of categories"
-              value="{{category.id}}"> {{category.name}} </option>
+              value="{{category.name}}"> {{category.name}} </option>
             <option [selected]="item.category == null"> Przypisz kategorię... </option>
           </select>
         </div>
@@ -47,13 +47,13 @@
       <!-- Cena netto -->
       <td class="align-middle text-center">
         <input [hidden]="!editMode || editId !== item.id" id="netto-price-select-{{item.id}}"
-          class="form-control" type="number" step="0.01" value="{{item.netto}}" [(ngModel)]="newNetto">
+          class="form-control" type="number" step="0.01" [(ngModel)]="newNetto">
         <p [hidden]="editMode && editId === item.id">{{ item.netto }}</p>
       </td>
       <!-- Cena dla klienta -->
       <td class="align-middle text-center">
         <input [hidden]="!editMode || editId !== item.id" id="end-price-select-{{item.id}}"
-          class="form-control" type="number" step="0.01" value="{{item.clientprice}}" [(ngModel)]="newClientPrice">
+          class="form-control" type="number" step="0.01" [(ngModel)]="newClientPrice">
         <p [hidden]="editMode && editId === item.id">{{ item.clientprice }}</p>
       </td>
       <!-- Cena sprzedaży -->
@@ -66,10 +66,10 @@
       </td>
       <!-- Modyfikowanie -->
       <td class="align-middle text-center">
-        <button [hidden]="editMode && editId === item.id" (click)="editProduct(item.id)" class="btn btn-modify btn-edit"></button>
-        <button [hidden]="editMode && editId === item.id" (click)="deleteProduct(item.id)" class="btn btn-modify btn-delete"></button>
-        <button [hidden]="!editMode || editId !== item.id" (click)="editProduct(item.id, true)" class="btn btn-modify btn-confirm"></button>
-        <button [hidden]="!editMode || editId !== item.id" (click)="editProduct(item.id, false)" class="btn btn-modify btn-cancel"></button>
+        <button [hidden]="editMode && editId === item.id" (click)="toggleEditMode(item)" class="btn btn-modify btn-edit"></button>
+        <button [hidden]="editMode && editId === item.id" (click)="deleteProduct(item)" class="btn btn-modify btn-delete"></button>
+        <button [hidden]="!editMode || editId !== item.id" (click)="editProduct(item, true); toggleEditMode(item)" class="btn btn-modify btn-confirm"></button>
+        <button [hidden]="!editMode || editId !== item.id" (click)="editProduct(item, false); toggleEditMode(item)" class="btn btn-modify btn-cancel"></button>
       </td>
     </tr>
   </tbody>

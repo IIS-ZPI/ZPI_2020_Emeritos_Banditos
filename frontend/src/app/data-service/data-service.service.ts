@@ -39,10 +39,9 @@ export class DataService {
   }
 
   public deleteProduct(id: number): Observable<Product[]> {
-    this.http.delete<any>(this.appBasePath + this.restServicesBasePath + 'delete/' + id).pipe(
+    return this.http.delete<any>(this.appBasePath + this.restServicesBasePath + 'delete/' + id).pipe(
       catchError(this.handleError)
     );
-    return this.products$;
   }
 
   private handleError(err: any) {
