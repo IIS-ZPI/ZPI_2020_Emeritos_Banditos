@@ -32,6 +32,19 @@ export class DataService {
     );
   }
 
+  public editProduct(product: Product): Observable<Product[]> {
+    return this.http.post<any>(this.appBasePath + this.restServicesBasePath + 'edit', product).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  public deleteProduct(id: number): Observable<Product[]> {
+    this.http.delete<any>(this.appBasePath + this.restServicesBasePath + 'delete/' + id).pipe(
+      catchError(this.handleError)
+    );
+    return this.products$;
+  }
+
   private handleError(err: any) {
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
