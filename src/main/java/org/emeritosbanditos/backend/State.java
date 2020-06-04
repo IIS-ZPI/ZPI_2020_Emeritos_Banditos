@@ -18,6 +18,7 @@ public class State {
     private double nonprescriptiondrug;
     private double clothing;
     private double intangibles;
+    private double clothing_exempt;
 
     public String getName() {
         return name;
@@ -73,6 +74,14 @@ public class State {
 
     public void setIntangibles(double intangibles) {
         this.intangibles = intangibles;
+    }
+
+    public double getClothing_exempt() {
+        return clothing_exempt;
+    }
+
+    public void setClothing_exempt(double clothing_exempt) {
+        this.clothing_exempt = clothing_exempt;
     }
 
     @Override
