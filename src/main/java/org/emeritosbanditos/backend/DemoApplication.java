@@ -1,5 +1,6 @@
 package org.emeritosbanditos.backend;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -73,16 +74,19 @@ public class DemoApplication extends SpringBootServletInitializer {
 
     private Product calculateProduct(Product product){
         State state = stateRepo.findByName(product.getState());
-        double margin = state.getMap().get(product.getCategory());
+        double tax = state.getMap().get(product.getCategory());
+        if(product.getCategory().equals("clothing")
+                && product.getQuantity()*product.getClientprice()<state.getClothing_exempt()){
+            tax=0;
+        }
 
-        if (margin == 0) {
+        if (tax == 0) {
             product.setSellprice(product.getClientprice());
         } else {
-            product.setSellprice(Math.round(product.getClientprice() * (1 - margin / 100)*100.0)/100.0);
+            product.setSellprice(Math.round(product.getClientprice() /(1+tax / 100)*100.0)/100.0);
         }
         product.setMargin(Math.round((product.getSellprice() - product.getNetto())*100)/100.0);
         return product;
     }
-
 
 }

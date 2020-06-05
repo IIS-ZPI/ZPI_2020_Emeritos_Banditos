@@ -15,18 +15,29 @@ public class Product implements Serializable, Comparable<Product> {
     private String name;
     private String category;
     private String state;
+    private int quantity;
     private double netto;
     private double clientprice;
     private double sellprice;
     private double margin;
 
-    public Product(int id,String name, String category, String state, double netto, double clientprice) {
-        this.id=id;
-        this.name = name;
+    public Product(int id, String category, String state, int quantity, double netto, double clientprice, double sellprice, double margin) {
+        this.id = id;
         this.category = category;
         this.state = state;
+        this.quantity = quantity;
         this.netto = netto;
         this.clientprice = clientprice;
+        this.sellprice = sellprice;
+        this.margin = margin;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -44,6 +55,7 @@ public class Product implements Serializable, Comparable<Product> {
                 ", name='" + name + '\'' +
                 ", category='" + category + '\'' +
                 ", state='" + state + '\'' +
+                ", quantity=" + quantity +
                 ", netto=" + netto +
                 ", clientprice=" + clientprice +
                 ", sellprice=" + sellprice +

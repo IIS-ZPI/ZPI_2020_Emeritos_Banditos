@@ -1,6 +1,5 @@
 package org.emeritosbanditos.backend;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -18,6 +17,7 @@ public class State {
     private double nonprescriptiondrug;
     private double clothing;
     private double intangibles;
+    private double clothing_exempt;
 
     public String getName() {
         return name;
@@ -75,17 +75,26 @@ public class State {
         this.intangibles = intangibles;
     }
 
+    public double getClothing_exempt() {
+        return clothing_exempt;
+    }
+
+    public void setClothing_exempt(double clothing_exempt) {
+        this.clothing_exempt = clothing_exempt;
+    }
+
     @Override
     public String toString() {
         return "State{" +
-               "name='" + name + '\'' +
-               ", groceries=" + groceries +
-               ", preparedfood=" + preparedfood +
-               ", prescriptiondrug=" + prescriptiondrug +
-               ", nonprescriptiondrug=" + nonprescriptiondrug +
-               ", clothing=" + clothing +
-               ", intangibles=" + intangibles +
-               '}';
+                "name='" + name + '\'' +
+                ", groceries=" + groceries +
+                ", preparedfood=" + preparedfood +
+                ", prescriptiondrug=" + prescriptiondrug +
+                ", nonprescriptiondrug=" + nonprescriptiondrug +
+                ", clothing=" + clothing +
+                ", intangibles=" + intangibles +
+                ", clothing_exempt=" + clothing_exempt +
+                '}';
     }
 
     public HashMap<String,Double> getMap(){
