@@ -1,6 +1,5 @@
 package org.emeritosbanditos.backend;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -87,14 +86,15 @@ public class State {
     @Override
     public String toString() {
         return "State{" +
-               "name='" + name + '\'' +
-               ", groceries=" + groceries +
-               ", preparedfood=" + preparedfood +
-               ", prescriptiondrug=" + prescriptiondrug +
-               ", nonprescriptiondrug=" + nonprescriptiondrug +
-               ", clothing=" + clothing +
-               ", intangibles=" + intangibles +
-               '}';
+                "name='" + name + '\'' +
+                ", groceries=" + groceries +
+                ", preparedfood=" + preparedfood +
+                ", prescriptiondrug=" + prescriptiondrug +
+                ", nonprescriptiondrug=" + nonprescriptiondrug +
+                ", clothing=" + clothing +
+                ", intangibles=" + intangibles +
+                ", clothing_exempt=" + clothing_exempt +
+                '}';
     }
 
     public HashMap<String,Double> getMap(){
