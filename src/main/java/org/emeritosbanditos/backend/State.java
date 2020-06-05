@@ -11,6 +11,7 @@ public class State {
 
     @Id
     private String name;
+    private double tax;
     private double groceries;
     private double preparedfood;
     private double prescriptiondrug;
@@ -18,6 +19,14 @@ public class State {
     private double clothing;
     private double intangibles;
     private double clothing_exempt;
+
+    public double getTax() {
+        return tax;
+    }
+
+    public void setTax(double tax) {
+        this.tax = tax;
+    }
 
     public String getName() {
         return name;
@@ -87,6 +96,7 @@ public class State {
     public String toString() {
         return "State{" +
                 "name='" + name + '\'' +
+                ", tax=" + tax +
                 ", groceries=" + groceries +
                 ", preparedfood=" + preparedfood +
                 ", prescriptiondrug=" + prescriptiondrug +

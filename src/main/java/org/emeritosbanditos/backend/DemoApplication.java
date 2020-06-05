@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
@@ -53,10 +54,12 @@ public class DemoApplication extends SpringBootServletInitializer {
     @GetMapping("/states")
     public List<String> getStatesList() {
         List<State> stateList = stateRepo.findAll();
-        List<String> returnList = new ArrayList<>();
-        for (State state : stateList) {
-            returnList.add(state.getName());
-        }
+        List<String> returnList =
+                stateList.stream()
+                        .map(State::getName)
+                        .sorted()
+                        .collect(Collectors.toList());
+
         return returnList;
     }
 
