@@ -12,13 +12,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalSettingsComponent } from './modal-settings/modal-settings.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
 
 @NgModule({
    declarations: [
       AppComponent,
       ProductsTableComponent,
       ModalComponent,
-      ModalSettingsComponent
+      ModalSettingsComponent,
+      MenuBarComponent
    ],
    imports: [
       BrowserModule,

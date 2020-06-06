@@ -37,4 +37,4 @@
   </div>
 </ng-template>
 
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Dodaj produkt</button>
+<button class="btn btn-lg" [ngClass]="{'btn-outline-primary': darkMode !== 'dark', 'btn-primary': darkMode === 'dark'}" (click)="open(content)">Dodaj produkt</button>

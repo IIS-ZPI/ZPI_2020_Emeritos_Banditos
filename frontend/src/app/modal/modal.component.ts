@@ -1,18 +1,19 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, Subscription } from 'rxjs';
 import { Category } from '../models/category';
 import { DataService } from '../data-service/data-service.service';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../models/product';
+import { LocalStorageService } from '../local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit, OnDestroy {
   @Input() categories$: Observable<Category[]>;
   @Output() addProductEvent = new EventEmitter<Product>();
   states$: Observable<string[]> = this.dataService.states$.pipe(
@@ -27,14 +28,24 @@ export class ModalComponent implements OnInit {
   state: string;
   netto: number;
   clientPrice: number;
+  darkMode: string;
+  darkModeSubscription: Subscription;
 
   constructor(config: NgbModalConfig, private modalService: NgbModal, private dataService: DataService,
-              private toastService: ToastrService) {
+              private toastService: ToastrService, private localStorageService: LocalStorageService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.darkModeSubscription = this.localStorageService.darkMode.subscribe(darkModeKey => {
+      this.darkMode = darkModeKey.value;
+    });
+  }
+
+  ngOnDestroy() {
+    this.darkModeSubscription.unsubscribe();
+  }
 
   open(content) {
     this.modalService.open(content);
