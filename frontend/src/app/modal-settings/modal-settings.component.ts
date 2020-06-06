@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
+import { LocalStorageService } from '../local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-modal-settings',
@@ -15,7 +16,7 @@ export class ModalSettingsComponent implements OnInit {
     fontSizeOption: new FormControl('small')
   });
 
-  constructor(config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(config: NgbModalConfig, private modalService: NgbModal, private localStorageService: LocalStorageService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -58,10 +59,10 @@ export class ModalSettingsComponent implements OnInit {
   resetTheme() {
     if (this.darkModeChecked) {
       document.body.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
+      this.localStorageService.store('theme', 'dark');
     } else {
       document.body.classList.remove('dark');
-      localStorage.removeItem('theme');
+      this.localStorageService.clear('theme');
     }
   }
 

@@ -1,0 +1,8 @@
+<!-- As a heading -->
+<nav class="navbar" [ngClass]="{'navbar-dark bg-dark': darkMode === 'dark', 'navbar-light bg-light': darkMode != 'dark'}">
+  <span class="navbar-brand mb-0 h1">ZPI IO-3-1</span>
+  <form class="form-inline">
+    <button class="btn mr-2" type="button" [ngClass]="{'btn-primary': darkMode === 'dark', 'btn-outline-primary': darkMode != 'dark'}">O nas</button>
+    <app-modal-settings></app-modal-settings>
+  </form>
+</nav>
