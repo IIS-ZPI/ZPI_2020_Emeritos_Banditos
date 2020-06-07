@@ -26,6 +26,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   name: string;
   category: string;
   state: string;
+  quantity: number;
   netto: number;
   clientPrice: number;
   darkMode: string;
@@ -61,6 +62,7 @@ export class ModalComponent implements OnInit, OnDestroy {
       {
         name: this.name,
         category: this.category,
+        quantity: this.quantity,
         state: this.state,
         netto: this.netto,
         clientprice: this.clientPrice

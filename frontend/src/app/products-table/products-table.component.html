@@ -3,11 +3,12 @@
     <tr>
       <th class="align-middle text-center" width="17%"> Nazwa </th>
       <th class="align-middle text-center" width="17%"> Kategoria </th>
-      <th class="align-middle text-center" width="12%"> Stan </th>
-      <th class="align-middle text-center" width="12%"> Cena netto ($) </th>
-      <th class="align-middle text-center" width="12%"> Cena dla klienta ($) </th>
-      <th class="align-middle text-center" width="12%"> Cena sprzedaży ($) </th>
-      <th class="align-middle text-center" width="12%"> Marża ($) </th>
+      <th class="align-middle text-center" width="10%"> Stan </th>
+      <th class="align-middle text-center" width="10%"> Liczba sztuk </th>
+      <th class="align-middle text-center" width="10%"> Cena netto ($) </th>
+      <th class="align-middle text-center" width="10%"> Cena dla klienta ($) </th>
+      <th class="align-middle text-center" width="10%"> Cena sprzedaży ($) </th>
+      <th class="align-middle text-center" width="10%"> Marża ($) </th>
       <th class="align-middle text-center" width="6%"> Edycja </th>
     </tr>
   </thead>
@@ -43,6 +44,12 @@
           </select>
         </div>
         <p [hidden]="editMode && editId === item.id">{{ item.state }}</p>
+      </td>
+      <!-- Liczba sztuk -->
+      <td class="align-middle text-center">
+        <input [hidden]="!editMode || editId !== item.id" id="quantity-select-{{item.id}}"
+          class="form-control" type="number" step="1" [(ngModel)]="newQuantity">
+        <p [hidden]="editMode && editId === item.id">{{ item.quantity }}</p>
       </td>
       <!-- Cena netto -->
       <td class="align-middle text-center">
