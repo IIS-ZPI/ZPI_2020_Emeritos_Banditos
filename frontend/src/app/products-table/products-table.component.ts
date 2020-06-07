@@ -36,6 +36,7 @@ export class ProductsTableComponent implements OnInit {
   newName: string;
   newCategory: string;
   newState: string;
+  newQuantity: number;
   newNetto: number;
   newClientPrice: number;
 
@@ -81,6 +82,7 @@ export class ProductsTableComponent implements OnInit {
       this.newName = item.name;
       this.newCategory = item.category;
       this.newState = item.state;
+      this.newQuantity = item.quantity;
       this.newNetto = item.netto;
       this.newClientPrice = item.clientprice;
       this.editMode = true;
@@ -89,6 +91,7 @@ export class ProductsTableComponent implements OnInit {
       this.newName = item.name;
       this.newCategory = item.category;
       this.newState = item.state;
+      this.newQuantity = item.quantity;
       this.newNetto = item.netto;
       this.newClientPrice = item.clientprice;
     } else {
@@ -105,6 +108,7 @@ export class ProductsTableComponent implements OnInit {
           name: this.newName,
           category: this.newCategory,
           state: this.newState,
+          quantity: this.newQuantity,
           netto: this.newNetto,
           clientprice: this.newClientPrice
         }).pipe(

@@ -77,19 +77,19 @@ body.font-large select {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1300px;
 }
 
 body.font-small .container {
-    max-width: 1200px;
+    max-width: 1300px;
 }
 
 body.font-medium .container {
-    max-width: 1400px;
+    max-width: 1450px;
 }
 
 body.font-large .container {
-    max-width: 1600px;
+    max-width: 1650px;
 }
 
 body.font-medium button.btn-modify {
