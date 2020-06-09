@@ -5,6 +5,7 @@ import { catchError, finalize, isEmpty, tap } from 'rxjs/operators';
 import { Category } from '../models/category';
 import { Product } from '../models/product';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-products-table',
@@ -39,8 +40,9 @@ export class ProductsTableComponent implements OnInit {
   newQuantity: number;
   newNetto: number;
   newClientPrice: number;
+  itemToDelete: Product;
 
-  constructor(private dataService: DataService, private toastService: ToastrService) { }
+  constructor(private dataService: DataService, private modalService: NgbModal, private toastService: ToastrService) { }
 
   ngOnInit() {
     const darkThemeSelected =
@@ -58,22 +60,24 @@ export class ProductsTableComponent implements OnInit {
     }
   }
 
+  open(content: any) {
+    this.modalService.open(content);
+  }
+
   deleteProduct(item: Product) {
-    if (confirm('Czy na pewno chcesz usunąć produkt ' + item.name + '?')) {
-      let errorOccured = false;
-      this.items$ = this.dataService.deleteProduct(item.id).pipe(
-        catchError(err => {
-          this.toastService.error('Nie udało się usunąć produktu', 'Błąd');
-          errorOccured = true;
-          return this.dataService.products$;
-        }),
-        tap(value => {
-          if (!errorOccured) {
-            this.toastService.success('Pomyślnie usunięto produkt', 'Sukces');
-          }
-        })
-      );
-    }
+    let errorOccured = false;
+    this.items$ = this.dataService.deleteProduct(item.id).pipe(
+      catchError(err => {
+        this.toastService.error('Nie udało się usunąć produktu', 'Błąd');
+        errorOccured = true;
+        return this.dataService.products$;
+      }),
+      tap(value => {
+        if (!errorOccured) {
+          this.toastService.success('Pomyślnie usunięto produkt', 'Sukces');
+        }
+      })
+    );
   }
 
   toggleEditMode(item: Product) {
