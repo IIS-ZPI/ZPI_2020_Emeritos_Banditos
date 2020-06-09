@@ -13,6 +13,7 @@ import { ModalSettingsComponent } from './modal-settings/modal-settings.componen
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { ModalAboutComponent } from './modal-about/modal-about.component';
 
 @NgModule({
    declarations: [
@@ -20,7 +21,8 @@ import { MenuBarComponent } from './menu-bar/menu-bar.component';
       ProductsTableComponent,
       ModalComponent,
       ModalSettingsComponent,
-      MenuBarComponent
+      MenuBarComponent,
+      ModalAboutComponent
    ],
    imports: [
       BrowserModule,
