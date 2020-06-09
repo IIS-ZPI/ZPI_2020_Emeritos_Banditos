@@ -1,0 +1,44 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Dodawanie produktu</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="name">Nazwa produktu</label>
+      <input type="text" class="form-control" id="name" placeholder="Nazwa produktu" [(ngModel)]="name">
+    </div>
+    <div class="form-group">
+      <label for="category">Kategoria</label>
+      <select *ngIf="categories$ | async as categories" class="form-control" id="category" [(ngModel)]="category">
+        <option *ngFor="let category of categories">{{ category.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="state">Stan</label>
+      <select *ngIf="states$ | async as states" class="form-control" id="state" [(ngModel)]="state">
+        <option *ngFor="let state of states">{{ state }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="netto">Liczba sztuk</label>
+      <input type="number" class="form-control" id="netto" min="0" value="0" step="1" [(ngModel)]="quantity">
+    </div>
+    <div class="form-group">
+      <label for="netto">Cena netto</label>
+      <input type="number" class="form-control" id="netto" min="0" value="0" step="0.01" [(ngModel)]="netto">
+    </div>
+    <div class="form-group">
+      <label for="clientPrice">Cena dla klienta</label>
+      <input type="number" class="form-control" id="clientPrice" min="0" value="0" step="0.01"
+        [(ngModel)]="clientPrice">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="sumbitProduct();c('Save click')">Dodaj</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg" [ngClass]="{'btn-outline-primary': darkMode !== 'dark', 'btn-primary': darkMode === 'dark'}" (click)="open(content)">Dodaj produkt</button>

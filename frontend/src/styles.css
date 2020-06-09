@@ -1,0 +1,120 @@
+/* You can add global styles to this file, and also import other style files */
+body.dark {
+    background-color: #121212 !important;
+    color: #eee !important;
+}
+
+body.dark div.modal-header,
+body.dark div.modal-body,
+body.dark div.modal-footer {
+    background-color: #333333;
+    color: #eee !important;
+}
+
+body.dark div.modal-content {
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+body.dark button.close {
+    color: #fff !important;
+    text-shadow: none;
+}
+
+body.dark button.btn-outline-dark {
+    color: #eee;
+    border-color: #eee;
+}
+
+body.dark button.btn-outline-dark:hover {
+    filter: brightness(125%);
+    transition: 0.2s;
+}
+
+body.dark button.btn-outline-dark:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255,.5);
+}
+
+body.dark tbody {
+    background-color: #f2f2f2;
+}
+
+body.dark td {
+    border-color: #454d55;
+}
+
+body.dark tr:hover {
+    background-color: #d9d9d9;
+}
+
+body.font-small th,
+body.font-small td,
+body.font-small button,
+body.font-small label,
+body.font-small input[type='text'],
+body.font-small input[type='number'],
+body.font-medium select {
+    font-size: 16px;
+}
+
+body.font-medium th,
+body.font-medium td,
+body.font-medium button,
+body.font-medium label,
+body.font-medium input[type='text'],
+body.font-medium input[type='number'],
+body.font-medium select {
+    font-size: 20px;
+}
+
+body.font-large th,
+body.font-large td,
+body.font-large button,
+body.font-large label,
+body.font-large input[type='text'],
+body.font-large input[type='number'],
+body.font-large select {
+    font-size: 24px;
+}
+
+body.font-medium button.btn-outline-secondary,
+body.font-large button.btn-outline-secondary {
+    font-size: initial;
+}
+
+.container {
+    max-width: 1300px;
+}
+
+body.font-small .container {
+    max-width: 1300px;
+}
+
+body.font-medium .container {
+    max-width: 1450px;
+}
+
+body.font-large .container {
+    max-width: 1650px;
+}
+
+body.font-medium button.btn-modify {
+    width: 24px !important;
+    height: 24px !important;
+    background-size: 24px 24px !important;
+}
+
+body.font-large button.btn-modify {
+    width: 28px !important;
+    height: 28px !important;
+    background-size: 28px 28px !important;
+}
+
+body.font-medium li.role,
+body.font-medium li.mail {
+    font-size: 18px;
+}
+
+body.font-large li.role,
+body.font-large li.mail {
+    font-size: 20px;
+}
