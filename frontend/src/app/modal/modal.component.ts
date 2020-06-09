@@ -42,6 +42,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.darkModeSubscription = this.localStorageService.darkMode.subscribe(darkModeKey => {
       this.darkMode = darkModeKey.value;
     });
+    this.localStorageService.forceDarkModeRefresh();
   }
 
   ngOnDestroy() {
