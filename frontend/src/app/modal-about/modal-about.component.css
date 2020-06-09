@@ -1,0 +1,41 @@
+img.team-picture {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+}
+
+div.card {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+div.info, div.pic {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+div.info {
+    width: 50%;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+li.name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+li.info, li.mail {
+    font-size: 16px;
+}

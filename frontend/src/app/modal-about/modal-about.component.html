@@ -1,0 +1,63 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Drużyna Emeritos Banditos</h4>
+        <button type="button" class="btn btn-outline-secondary" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="card">
+            <div class="pic">
+                <img src="/assets/img/1.jpg" class="team-picture" />
+            </div>
+            <div class="info">
+                <ul>
+                    <li class="name">Jędrzej Lis-Marciniak</li>
+                    <li class="role">Team Leader, Frontend</li>
+                    <li class="mail"><a href="mailto:215799@edu.p.lodz.pl">215799@edu.p.lodz.pl</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="pic">
+                <img src="/assets/img/2.jpg" class="team-picture" />
+            </div>
+            <div class="info">
+                <ul>
+                    <li class="name">Alan Olborski</li>
+                    <li class="role">Frontend</li>
+                    <li class="mail"><a href="mailto:215836@edu.p.lodz.pl">215836@edu.p.lodz.pl</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="pic">
+                <img src="/assets/img/3.jpg" class="team-picture" />
+            </div>
+            <div class="info">
+                <ul>
+                    <li class="name">Alan Piątkowski</li>
+                    <li class="role">Backend</li>
+                    <li class="mail"><a href="mailto:215848@edu.p.lodz.pl">215848@edu.p.lodz.pl</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="card">
+            <div class="pic">
+                <img src="/assets/img/4.jpg" class="team-picture" />
+            </div>
+            <div class="info">
+                <ul>
+                    <li class="name">David Zientak</li>
+                    <li class="role">Backend</li>
+                    <li class="mail"><a href="mailto:215934@edu.p.lodz.pl">215934@edu.p.lodz.pl</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Zamknij</button>
+    </div>
+</ng-template>
+
+<button class="btn mr-2 btn-primary" (click)="open(content)">O nas</button>

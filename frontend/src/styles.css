@@ -76,6 +76,11 @@ body.font-large select {
     font-size: 24px;
 }
 
+body.font-medium button.btn-outline-secondary,
+body.font-large button.btn-outline-secondary {
+    font-size: initial;
+}
+
 .container {
     max-width: 1300px;
 }
@@ -102,4 +107,14 @@ body.font-large button.btn-modify {
     width: 28px !important;
     height: 28px !important;
     background-size: 28px 28px !important;
+}
+
+body.font-medium li.role,
+body.font-medium li.mail {
+    font-size: 18px;
+}
+
+body.font-large li.role,
+body.font-large li.mail {
+    font-size: 20px;
 }
