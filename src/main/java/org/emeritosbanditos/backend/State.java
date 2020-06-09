@@ -1,8 +1,8 @@
 package org.emeritosbanditos.backend;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 
 @Entity
@@ -107,18 +107,21 @@ public class State {
                 '}';
     }
 
-    public HashMap<String,Double> getMap(){
+    public HashMap<String,Double> getMap()  {
         HashMap<String,Double> result=new HashMap<>();
-        result.put("groceries",groceries);
-        result.put("preparedfood", preparedfood);
-        result.put("prescriptiondrug", preparedfood);
-        result.put("nonprescriptiondrug", nonprescriptiondrug);
-        result.put("clothing",clothing);
-        result.put("intangibles",intangibles);
+        for(Field f:State.class.getDeclaredFields()){
+            if(!f.getName().equals("name")){
+                try {
+                    result.put(f.getName(),(Double)f.get(this));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
         return result;
     }
 
     public State() {
     }
 }
-

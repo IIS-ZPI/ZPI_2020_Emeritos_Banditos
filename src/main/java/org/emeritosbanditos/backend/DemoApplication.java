@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -62,13 +62,12 @@ public class DemoApplication extends SpringBootServletInitializer {
 
         return returnList;
     }
-
     @GetMapping("/categories")
     public List<Category> getCategoriesList() {
         List<Category> returnList=new ArrayList<>();
         int id=0;
         for(Field f:State.class.getDeclaredFields()){
-            if(!f.getName().equals("name")){
+            if(!f.getName().equals("name") && !f.getName().contains("exempt")){
                 returnList.add(new Category(id++,f.getName()));
             }
         }
@@ -78,8 +77,13 @@ public class DemoApplication extends SpringBootServletInitializer {
     private Product calculateProduct(Product product){
         State state = stateRepo.findByName(product.getState());
         double tax = state.getMap().get(product.getCategory());
-        if(product.getCategory().equals("clothing")
-                && product.getQuantity()*product.getClientprice()<state.getClothing_exempt()){
+        String exemptName=product.getCategory()+"_exempt";
+        Optional<Double> exempt=Optional.ofNullable(state.getMap().get(exemptName));
+
+        product.setNetto(product.getNetto()*product.getQuantity());
+        product.setClientprice(product.getClientprice()*product.getQuantity());
+
+        if(product.getClientprice()<exempt.orElse((double) 0)){
             tax=0;
         }
 
@@ -88,6 +92,7 @@ public class DemoApplication extends SpringBootServletInitializer {
         } else {
             product.setSellprice(Math.round(product.getClientprice() /(1+tax / 100)*100.0)/100.0);
         }
+
         product.setMargin(Math.round((product.getSellprice() - product.getNetto())*100)/100.0);
         return product;
     }
