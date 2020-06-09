@@ -27,6 +27,9 @@ export class LocalStorageService implements OnDestroy {
       this.onSubject.next({key, value: null});
   }
 
+  public forceDarkModeRefresh(): void {
+    this.onSubject.next({key: 'theme', value: localStorage.getItem('theme')});
+  }
 
   private start(): void {
       window.addEventListener('storage', this.storageEventListener.bind(this));
