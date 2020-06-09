@@ -74,7 +74,7 @@
       <!-- Modyfikowanie -->
       <td class="align-middle text-center">
         <button [hidden]="editMode && editId === item.id" (click)="toggleEditMode(item)" class="btn btn-modify btn-edit"></button>
-        <button [hidden]="editMode && editId === item.id" (click)="deleteProduct(item)" class="btn btn-modify btn-delete"></button>
+        <button [hidden]="editMode && editId === item.id" (click)="itemToDelete=item; open(deleteDialog)" class="btn btn-modify btn-delete"></button>
         <button [hidden]="!editMode || editId !== item.id" (click)="editProduct(item, true); toggleEditMode(item)" class="btn btn-modify btn-confirm"></button>
         <button [hidden]="!editMode || editId !== item.id" (click)="editProduct(item, false); toggleEditMode(item)" class="btn btn-modify btn-cancel"></button>
       </td>
@@ -84,3 +84,20 @@
 <div class="mt-3">
   <app-modal [categories$]="categories$" (addProductEvent)="addProduct($event)"></app-modal>
 </div>
+
+<ng-template #deleteDialog let-c="close" let-d="dismiss">
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Usuwanie produktu</h4>
+      <button type="button" class="btn btn-outline-secondary" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+    <p><b>{{itemToDelete.name}} - {{itemToDelete.category}} - {{itemToDelete.state}}</b></p>
+    <p>Czy na pewno chcesz usunąć ten produkt?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cancel click')">Anuluj</button>
+    <button type="button" class="btn btn-danger" (click)="deleteProduct(itemToDelete); c('Confirm click')">Potwierdź</button>
+  </div>
+</ng-template>

@@ -34,3 +34,11 @@
 td p {
     margin: 0;
 }
+
+div.modal-body {
+    text-align: center;
+}
+
+div.modal-body p {
+    margin: 10px;
+}
