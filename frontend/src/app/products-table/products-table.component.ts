@@ -55,7 +55,7 @@ export class ProductsTableComponent implements OnInit {
     if (fontSize != null) {
       document.body.classList.add('font-' + fontSize);
     } else {
-      localStorage.setItem('font-size', 'small');
+      localStorage.setItem('fontSize', 'small');
       document.body.classList.add('font-small');
     }
   }
