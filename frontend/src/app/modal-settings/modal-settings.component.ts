@@ -23,6 +23,7 @@ export class ModalSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initTheme();
+    this.initFont();
   }
 
   open(content: any) {
@@ -32,10 +33,10 @@ export class ModalSettingsComponent implements OnInit {
   initFont() {
     const fontSize = localStorage.getItem('fontSize');
     if (fontSize != null) {
-      this.fontSizeForm.setValue({ fontSizeOption: fontSize, tc: true });
+      this.fontSizeForm.setValue({ fontSizeOption: fontSize });
       document.body.classList.add('font-' + fontSize);
     } else {
-      this.fontSizeForm.setValue({ fontSizeOption: 'small', tc: true });
+      this.fontSizeForm.setValue({ fontSizeOption: 'small'});
     }
   }
 
