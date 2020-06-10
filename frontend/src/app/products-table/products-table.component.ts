@@ -64,6 +64,14 @@ export class ProductsTableComponent implements OnInit {
     this.modalService.open(content);
   }
 
+  divide(x: number, y: number) {
+    if (y === 0) {
+      return 0;
+    } else {
+      return x / y;
+    }
+  }
+
   deleteProduct(item: Product) {
     let errorOccured = false;
     this.items$ = this.dataService.deleteProduct(item.id).pipe(
@@ -87,8 +95,8 @@ export class ProductsTableComponent implements OnInit {
       this.newCategory = item.category;
       this.newState = item.state;
       this.newQuantity = item.quantity;
-      this.newNetto = item.netto;
-      this.newClientPrice = item.clientprice;
+      this.newNetto = this.divide(item.netto, item.quantity);
+      this.newClientPrice = this.divide(item.clientprice, item.quantity);
       this.editMode = true;
     } else if (this.editMode && this.editId !== item.id) {
       this.editId = item.id;
@@ -96,8 +104,8 @@ export class ProductsTableComponent implements OnInit {
       this.newCategory = item.category;
       this.newState = item.state;
       this.newQuantity = item.quantity;
-      this.newNetto = item.netto;
-      this.newClientPrice = item.clientprice;
+      this.newNetto = this.divide(item.netto, item.quantity);
+      this.newClientPrice = this.divide(item.clientprice, item.quantity);
     } else {
       this.editMode = false;
     }
