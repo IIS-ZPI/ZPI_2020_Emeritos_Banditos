@@ -118,3 +118,11 @@ body.font-large li.role,
 body.font-large li.mail {
     font-size: 20px;
 }
+
+body.font-medium div.modal-body p {
+    font-size: 18px;
+}
+
+body.font-large div.modal-body p {
+    font-size: 20px;
+}
