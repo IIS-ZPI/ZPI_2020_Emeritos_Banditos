@@ -29,6 +29,8 @@ public class DemoApplication extends SpringBootServletInitializer {
 
     @PostMapping("/product")
     public List<Product> getPrice(@RequestBody Product product) {
+        if(product.getQuantity()<=0)
+            product.setQuantity(1);
         productRepo.save(calculateProduct(product));
         return productRepo.findAll().stream().sorted().collect(Collectors.toList());
     }
@@ -40,6 +42,8 @@ public class DemoApplication extends SpringBootServletInitializer {
 
     @PostMapping("/edit")
     public List<Product> editProduct(@RequestBody Product product){
+        if(product.getQuantity()<=0)
+            product.setQuantity(1);
         productRepo.save(calculateProduct(product));
         return productRepo.findAll().stream().sorted().collect(Collectors.toList());
     }
