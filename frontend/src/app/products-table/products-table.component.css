@@ -42,3 +42,11 @@ div.modal-body {
 div.modal-body p {
     margin: 10px;
 }
+
+thead {
+    background-color: #009933 !important;
+}
+
+thead.thead-dark {
+    background-color: #006622 !important;
+}
